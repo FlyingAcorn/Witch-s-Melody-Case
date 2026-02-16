@@ -7,7 +7,7 @@ namespace _GAME_.Scripts
     public class PlayerController : MonoBehaviour
     {
         [Header("References")] 
-        [SerializeField] private Rigidbody myRigidBody;
+        [SerializeField] private CharacterController characterController;
         [SerializeField] private Camera myCamera;
         [SerializeField] private Transform myHead;
         [SerializeField] private InputActionAsset myInputActionAsset;
@@ -17,6 +17,10 @@ namespace _GAME_.Scripts
         [SerializeField] private float runSpeed = 10f;
         [SerializeField] private float mouseSensitivity = 0.1f;
         [SerializeField] private float upDownLookRange = 80f;
+        [SerializeField] private float forceMagnitude;
+        [SerializeField] private float gravityMagnitude;
+        
+        
 
         // inputs
         private InputAction _moveAction;
@@ -66,7 +70,8 @@ namespace _GAME_.Scripts
         {
             var worldDirection = CalculateWorldDirection();
             var speed = _sprintAction.IsPressed() ? runSpeed : walkSpeed;
-            myRigidBody.linearVelocity = worldDirection * speed;
+            worldDirection.y += Physics.gravity.y * gravityMagnitude * Time.deltaTime; // change this when you add jumping
+            characterController.Move(worldDirection * Time.deltaTime * speed);
         }
         private Vector3 CalculateWorldDirection()
         {
@@ -94,6 +99,17 @@ namespace _GAME_.Scripts
            _verticalRotation = Mathf.Clamp(_verticalRotation - rotationAmount, -upDownLookRange, upDownLookRange);
             myCamera.transform.localRotation = Quaternion.Euler(_verticalRotation, 0, 0);
         }
-        
+
+        private void OnControllerColliderHit(ControllerColliderHit hit)
+        {
+            Rigidbody body = hit.collider.attachedRigidbody;
+            if (body != null)
+            {
+                Vector3 forceDirection = body.gameObject.transform.position - transform.position;
+                forceDirection.y = 0;
+                forceDirection.Normalize();
+                body.AddForceAtPosition(forceDirection * forceMagnitude,transform.position,ForceMode.Impulse);
+            }
+        }
     }
 }
