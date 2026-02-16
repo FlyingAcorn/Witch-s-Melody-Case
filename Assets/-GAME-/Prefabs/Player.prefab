@@ -260,6 +260,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!114 &5799891501031534074
 MonoBehaviour:
@@ -275,14 +276,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::_GAME_.Scripts.PlayerController
   characterController: {fileID: 1750257667971372825}
   myCamera: {fileID: 2994564477841062547}
-  myHead: {fileID: 912088497111733172}
   myInputActionAsset: {fileID: -944628639613478452, guid: 64a5292c3bc77b74bb9a28263b938f63, type: 3}
-  walkSpeed: 5
-  runSpeed: 10
+  cameraHolder: {fileID: 912088497111733172}
+  walkSpeed: 3
+  runSpeed: 6
   mouseSensitivity: 0.1
   upDownLookRange: 80
-  forceMagnitude: 0.5
-  gravityMagnitude: 2
+  amplitude: 0.00504
+  frequency: 10
+  tiltAmount: 3
+  tiltStartSpeed: 4
+  tiltEndSpeed: 10
 --- !u!143 &1750257667971372825
 CharacterController:
   m_ObjectHideFlags: 0
@@ -296,7 +300,7 @@ CharacterController:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   m_LayerOverridePriority: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
