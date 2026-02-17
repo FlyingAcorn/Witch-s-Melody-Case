@@ -10,8 +10,6 @@ namespace _GAME_.Scripts
         [SerializeField] private Camera myCamera;
         [SerializeField] private InputActionAsset myInputActionAsset;
         [SerializeField] private Transform cameraHolder;
-        
-        
 
         [Header("MovementConfigurations")]
         [SerializeField] private float walkSpeed = 5f;
@@ -41,7 +39,6 @@ namespace _GAME_.Scripts
         private InputAction _sprintAction;
         private InputAction _lookAction;
         
-
         private void OnEnable()
         {
             myInputActionAsset.FindActionMap("Gameplay").Enable();

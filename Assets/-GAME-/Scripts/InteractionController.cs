@@ -1,7 +1,9 @@
 using System;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
+
 namespace _GAME_.Scripts
 {
     public class InteractionController : MonoBehaviour
@@ -19,6 +21,9 @@ namespace _GAME_.Scripts
         private InputAction _pickupAction;
         private InputAction _throwAction;
         private int _previousLayer;
+        
+        //Events
+        public UnityEvent<int> interactionState;// 0 normal, 1 picked the interactable
 
         private void Awake()
         {
@@ -41,11 +46,13 @@ namespace _GAME_.Scripts
                 {
                     _selectedInteractable= _currentTargetedInteractable;
                     PickUpObject(_selectedInteractable.InteractObject);
+                    interactionState?.Invoke(1);
                 }
                 else
                 {
                     StopClipping();
                     DropObject();
+                    interactionState?.Invoke(0);
                 }
             }
             if (_selectedInteractable != null)
@@ -55,6 +62,7 @@ namespace _GAME_.Scripts
                 {
                  StopClipping();
                  ThrowObject();
+                 interactionState?.Invoke(0);
                 }
             }
         }
