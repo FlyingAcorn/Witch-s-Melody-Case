@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
-namespace _GAME_.Scripts
+namespace _GAME_.Scripts.Player
 {
     public class InteractionController : MonoBehaviour
     {
