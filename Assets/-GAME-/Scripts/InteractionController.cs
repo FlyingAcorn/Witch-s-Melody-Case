@@ -16,10 +16,11 @@ namespace _GAME_.Scripts
         [SerializeField] private int targetLayer;
         [SerializeField] private Transform objHoldPos;
         private IInteractable _currentTargetedInteractable;
-        private IInteractable _selectedInteractable;
+        private IInteractable _pickedInteractable;
         [SerializeField] private InputActionAsset myInputActionAsset;
         private InputAction _pickupAction;
         private InputAction _throwAction;
+        private InputAction _interactAction;
         private int _previousLayer;
         
         //Events
@@ -29,6 +30,7 @@ namespace _GAME_.Scripts
         {
             _pickupAction = myInputActionAsset.FindAction("PickUp");
             _throwAction = myInputActionAsset.FindAction("Throw");
+            _interactAction = myInputActionAsset.FindAction("Interact");
         }
 
         private void Update()
@@ -42,20 +44,27 @@ namespace _GAME_.Scripts
         {
             if (_pickupAction.WasReleasedThisFrame() && _currentTargetedInteractable != null)
             {
-                if (_selectedInteractable == null)
+                if (_pickedInteractable == null)
                 {
-                    _selectedInteractable= _currentTargetedInteractable;
-                    PickUpObject(_selectedInteractable.InteractObject);
-                    interactionState?.Invoke(1);
+                    if (_currentTargetedInteractable.CanBePickedUp)
+                    {
+                        _pickedInteractable= _currentTargetedInteractable;
+                        PickUpObject(_pickedInteractable.InteractObject);
+                        interactionState?.Invoke(1);
+                    }
+                    else if (_currentTargetedInteractable.IsInteractable)
+                    {
+                        _currentTargetedInteractable.Interact();
+                    }
                 }
-                else
+                else 
                 {
                     StopClipping();
                     DropObject();
                     interactionState?.Invoke(0);
                 }
             }
-            if (_selectedInteractable != null)
+            if (_pickedInteractable != null)
             {
                 MoveObject();
                 if (_throwAction.WasReleasedThisFrame())
@@ -64,12 +73,16 @@ namespace _GAME_.Scripts
                  ThrowObject();
                  interactionState?.Invoke(0);
                 }
+                if (_interactAction.IsPressed()&& _pickedInteractable.IsInteractable)
+                {
+                    _pickedInteractable.Interact();
+                }
             }
         }
 
         private void UpdateInteractionText()
         {
-            if (_currentTargetedInteractable == null || _currentTargetedInteractable == _selectedInteractable )
+            if (_currentTargetedInteractable == null || _currentTargetedInteractable == _pickedInteractable )
             {
                 interactionText.text = String.Empty;
                 return;
@@ -97,37 +110,37 @@ namespace _GAME_.Scripts
         }
         void DropObject()
         {
-            _selectedInteractable.InteractObject.TryGetComponent(out Rigidbody rb);
-            Physics.IgnoreCollision(_selectedInteractable.InteractObject.GetComponent<Collider>(), GetComponent<CharacterController>(), false);
-            _selectedInteractable.InteractObject.layer = _previousLayer; 
+            _pickedInteractable.InteractObject.TryGetComponent(out Rigidbody rb);
+            Physics.IgnoreCollision(_pickedInteractable.InteractObject.GetComponent<Collider>(), GetComponent<CharacterController>(), false);
+            _pickedInteractable.InteractObject.layer = _previousLayer; 
             rb.isKinematic = false;
-            _selectedInteractable.InteractObject.transform.parent = null; 
-            _selectedInteractable = null; 
+            _pickedInteractable.InteractObject.transform.parent = null; 
+            _pickedInteractable = null; 
         }
         void StopClipping()
         {
-            var clipRange = Vector3.Distance(_selectedInteractable.InteractObject.transform.position, transform.position);
+            var clipRange = Vector3.Distance(_pickedInteractable.InteractObject.transform.position, transform.position);
             RaycastHit[] hits;
             // ReSharper disable once Unity.PreferNonAllocApi
             hits = Physics.RaycastAll(transform.position, transform.TransformDirection(Vector3.forward), clipRange);
             if (hits.Length > 1)
             {
-                _selectedInteractable.InteractObject.transform.position = transform.position + new Vector3(0f, -0.5f, 0f);
+                _pickedInteractable.InteractObject.transform.position = transform.position + new Vector3(0f, -0.5f, 0f);
             }
         }
         void MoveObject()
         {
-            _selectedInteractable.InteractObject.transform.position = objHoldPos.transform.position;
+            _pickedInteractable.InteractObject.transform.position = objHoldPos.transform.position;
         }
         void ThrowObject()
         {
-            _selectedInteractable.InteractObject.TryGetComponent(out Rigidbody rb);
-            Physics.IgnoreCollision(_selectedInteractable.InteractObject.GetComponent<Collider>(), GetComponent<CharacterController>(), false);
-            _selectedInteractable.InteractObject.layer = _previousLayer;
+            _pickedInteractable.InteractObject.TryGetComponent(out Rigidbody rb);
+            Physics.IgnoreCollision(_pickedInteractable.InteractObject.GetComponent<Collider>(), GetComponent<CharacterController>(), false);
+            _pickedInteractable.InteractObject.layer = _previousLayer;
             rb.isKinematic = false;
-            _selectedInteractable.InteractObject.transform.parent = null;
-            rb.AddForce(transform.forward * throwForce);
-            _selectedInteractable = null;
+            _pickedInteractable.InteractObject.transform.parent = null;
+            rb.AddForce(transform.forward * throwForce); // sharpsa farklı yapsın
+            _pickedInteractable = null;
         }
     }
 }
