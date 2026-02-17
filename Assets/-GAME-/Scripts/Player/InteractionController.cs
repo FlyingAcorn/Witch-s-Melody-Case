@@ -40,43 +40,43 @@ namespace _GAME_.Scripts.Player
             CheckForInteractionInput();
         }
 
-        private void CheckForInteractionInput()
+        private void FixedUpdate()
         {
-            if (_pickupAction.WasReleasedThisFrame() && _currentTargetedInteractable != null)
-            {
-                if (_pickedInteractable == null)
-                {
-                    if (_currentTargetedInteractable.CanBePickedUp)
-                    {
-                        _pickedInteractable= _currentTargetedInteractable;
-                        PickUpObject(_pickedInteractable.InteractObject);
-                        interactionState?.Invoke(1);
-                    }
-                    else if (_currentTargetedInteractable.IsInteractable)
-                    {
-                        _currentTargetedInteractable.Interact();
-                    }
-                }
-                else 
-                {
-                    StopClipping();
-                    DropObject();
-                    interactionState?.Invoke(0);
-                }
-            }
             if (_pickedInteractable != null)
             {
                 MoveObject();
-                if (_throwAction.WasReleasedThisFrame())
+            }
+        }
+
+        private void CheckForInteractionInput()
+        {
+            if (_pickupAction.WasReleasedThisFrame() && _currentTargetedInteractable != null && _pickedInteractable == null )
+            {
+                if (_currentTargetedInteractable.CanBePickedUp) 
                 {
-                 StopClipping();
-                 ThrowObject();
-                 interactionState?.Invoke(0);
+                    _pickedInteractable= _currentTargetedInteractable;
+                    PickUpObject(_pickedInteractable.InteractObject);
+                    interactionState?.Invoke(1); 
                 }
-                if (_interactAction.IsPressed()&& _pickedInteractable.IsInteractable)
+                else if (_currentTargetedInteractable.IsInteractable)
                 {
-                    _pickedInteractable.Interact();
+                    _currentTargetedInteractable.Interact();
                 }
+            }
+            else if (_pickupAction.WasReleasedThisFrame() && _pickedInteractable != null)
+            {
+                DropObject();
+                interactionState?.Invoke(0);
+            }
+            if (_pickedInteractable == null) return;
+            if (_throwAction.WasReleasedThisFrame())
+            {
+                ThrowObject();
+                interactionState?.Invoke(0);
+            }
+            if (_interactAction.IsPressed()&& _pickedInteractable.IsInteractable)
+            {
+                _pickedInteractable.Interact();
             }
         }
 
@@ -101,7 +101,7 @@ namespace _GAME_.Scripts.Player
         {
             if (pickUpObj.TryGetComponent(out Rigidbody rb)) 
             {
-                rb.isKinematic = true;
+                rb.useGravity =false;
                 rb.transform.parent = objHoldPos.transform;
                 _previousLayer = pickUpObj.layer;
                 pickUpObj.layer = targetLayer;
@@ -110,36 +110,24 @@ namespace _GAME_.Scripts.Player
         }
         void DropObject()
         {
-            _pickedInteractable.InteractObject.TryGetComponent(out Rigidbody rb);
+            _pickedInteractable.InteractRigidbody.useGravity = true;
             Physics.IgnoreCollision(_pickedInteractable.InteractObject.GetComponent<Collider>(), GetComponent<CharacterController>(), false);
             _pickedInteractable.InteractObject.layer = _previousLayer; 
-            rb.isKinematic = false;
             _pickedInteractable.InteractObject.transform.parent = null; 
             _pickedInteractable = null; 
         }
-        void StopClipping()
-        {
-            var clipRange = Vector3.Distance(_pickedInteractable.InteractObject.transform.position, transform.position);
-            RaycastHit[] hits;
-            // ReSharper disable once Unity.PreferNonAllocApi
-            hits = Physics.RaycastAll(transform.position, transform.TransformDirection(Vector3.forward), clipRange);
-            if (hits.Length > 1)
-            {
-                _pickedInteractable.InteractObject.transform.position = transform.position + new Vector3(0f, -0.5f, 0f);
-            }
-        }
         void MoveObject()
         {
-            _pickedInteractable.InteractObject.transform.position = objHoldPos.transform.position;
+            _pickedInteractable.InteractObject.transform.position =
+                Vector3.MoveTowards(_pickedInteractable.InteractObject.transform.position,objHoldPos.position,10f * Time.fixedDeltaTime);
         }
         void ThrowObject()
         {
-            _pickedInteractable.InteractObject.TryGetComponent(out Rigidbody rb);
+            _pickedInteractable.InteractRigidbody.useGravity = true;
             Physics.IgnoreCollision(_pickedInteractable.InteractObject.GetComponent<Collider>(), GetComponent<CharacterController>(), false);
             _pickedInteractable.InteractObject.layer = _previousLayer;
-            rb.isKinematic = false;
             _pickedInteractable.InteractObject.transform.parent = null;
-            rb.AddForce(transform.forward * throwForce); // sharpsa farklı yapsın
+            _pickedInteractable.InteractRigidbody.AddForce(transform.forward * throwForce); // sharpsa farklı yapsın
             _pickedInteractable = null;
         }
     }

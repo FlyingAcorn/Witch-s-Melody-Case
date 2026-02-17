@@ -21,12 +21,17 @@ namespace _GAME_.Scripts.FoodRelated
         [SerializeField] private bool isSharp;
         [Header("FoodConfigurations")] 
         [SerializeField] private int cookTime;
+        [SerializeField] private int burnTime;
         [SerializeField] private FoodState currentFoodState;
         [SerializeField] private List<Material> foodStateMaterials;
         private Coroutine _currentCoroutine;
+        private Rigidbody _rigidbody;
+        private Collider _interactCollider;
         
         public string InteractMessage => objectInteractMessage;
         public GameObject InteractObject => gameObject;
+        public Rigidbody InteractRigidbody => _rigidbody;
+        public Collider InteractCollider => _interactCollider;
         public bool IsInteractable => isInteractable;
         public bool CanBePickedUp => canBePickedUp;
         public bool IsSharp => isSharp;
@@ -37,6 +42,8 @@ namespace _GAME_.Scripts.FoodRelated
         private void Awake()
         {
             UpdateFoodState(FoodState.Raw);
+            _rigidbody = GetComponent<Rigidbody>();
+            _interactCollider  = GetComponent<Collider>();
         }
 
         private void UpdateFoodState(FoodState state)
@@ -61,16 +68,20 @@ namespace _GAME_.Scripts.FoodRelated
 
         private IEnumerator Cooking()
         {
-            while (currentFoodState != FoodState.Burned)
+            while (currentFoodState == FoodState.Raw)
             {
                 yield return new WaitForSeconds(cookTime);
                 if (currentFoodState == FoodState.Raw) UpdateFoodState(FoodState.Cooked);
-                else if (currentFoodState == FoodState.Cooked) UpdateFoodState(FoodState.Burned);
                 
-                yield return null;
+            }
+
+            while (currentFoodState == FoodState.Cooked)
+            {
+                yield return new WaitForSeconds(burnTime); 
+                if (currentFoodState == FoodState.Cooked) UpdateFoodState(FoodState.Burned);
             }
         }
-
+        
         private void OnTriggerEnter(Collider other)
         {
             if (other.TryGetComponent<Stove>(out Stove _))
