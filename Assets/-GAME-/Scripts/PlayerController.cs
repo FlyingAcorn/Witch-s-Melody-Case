@@ -10,6 +10,8 @@ namespace _GAME_.Scripts
         [SerializeField] private Camera myCamera;
         [SerializeField] private InputActionAsset myInputActionAsset;
         [SerializeField] private Transform cameraHolder;
+        
+        
 
         [Header("MovementConfigurations")]
         [SerializeField] private float walkSpeed = 5f;
@@ -32,13 +34,13 @@ namespace _GAME_.Scripts
         private float _currentTilt;
         private float _targetTilt;
         
-        
         [Header("OtherConfigurations")] //
 
         // inputs
         private InputAction _moveAction;
         private InputAction _sprintAction;
         private InputAction _lookAction;
+        
 
         private void OnEnable()
         {
@@ -69,8 +71,9 @@ namespace _GAME_.Scripts
             _moveAmount = _moveAction.ReadValue<Vector2>();
             _lookAmount = _lookAction.ReadValue<Vector2>();
             Looking();
+            
         }
-
+        
         private void FixedUpdate()
         {
             Moving();
@@ -160,14 +163,5 @@ namespace _GAME_.Scripts
             }
             _currentTilt = Mathf.Lerp(_currentTilt, _targetTilt, smoothTilt *Time.deltaTime);
         }
-
-        /*private void Throw()
-        {
-             body = touched object;
-            Vector3 forceDirection = body.gameObject.transform.position - transform.position;
-            forceDirection.y = 0;
-            forceDirection.Normalize();
-            body.AddForceAtPosition(forceDirection * pushForceMagnitude, transform.position, ForceMode.Impulse);
-        }*/
     }
 }
