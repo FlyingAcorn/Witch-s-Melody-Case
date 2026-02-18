@@ -11,6 +11,7 @@ namespace _GAME_.Scripts
         public bool IsInteractable => isInteractable;
         public bool CanBePickedUp => canBePickedUp;
         public bool IsSharp => isSharp;
+        public bool IsPickedUp { get; set; }
         public Rigidbody InteractRigidbody => _rigidbody;
 
         private void Awake()

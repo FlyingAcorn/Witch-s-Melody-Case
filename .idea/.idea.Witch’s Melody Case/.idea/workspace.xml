@@ -14,9 +14,9 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/Assets/-GAME-/Scripts/FoodRelated/Grill.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/-GAME-/Scripts/IInteractable.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/-GAME-/Scripts/Object.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/-GAME-/Scripts/PickUp.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
   <component name="ProjectColorInfo">{
@@ -111,6 +111,7 @@
       <workItem from="1771280180534" duration="9644000" />
       <workItem from="1771325185403" duration="7355000" />
       <workItem from="1771342100279" duration="11375000" />
+      <workItem from="1771364599679" duration="12411000" />
     </task>
     <servers />
   </component>

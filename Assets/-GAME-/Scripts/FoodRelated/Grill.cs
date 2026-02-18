@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace _GAME_.Scripts.FoodRelated
 {
-    public class Stove : MonoBehaviour
+    public class Grill : MonoBehaviour
     {
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         void Start()
@@ -11,7 +11,7 @@ namespace _GAME_.Scripts.FoodRelated
         }
 
         // Update is called once per frame
-        void Update()
+        void Update()   
         {
         
         }

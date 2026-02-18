@@ -22,6 +22,7 @@ namespace _GAME_.Scripts.Player
         private InputAction _throwAction;
         private InputAction _interactAction;
         private int _previousLayer;
+        [SerializeField] private LayerMask objectLayer;
         
         //Events
         public UnityEvent<int> interactionState;// 0 normal, 1 picked the interactable
@@ -93,7 +94,7 @@ namespace _GAME_.Scripts.Player
         private void UpdateCurrentInteractable()
         {
             var ray = playerCamera.ViewportPointToRay(new Vector2(0.5f, 0.5f));
-            Physics.Raycast(ray, out var hit, interactionRange);
+            Physics.Raycast(ray, out var hit, interactionRange, objectLayer);
             _currentTargetedInteractable = hit.collider?.GetComponent<IInteractable>();
         }
         
@@ -101,6 +102,7 @@ namespace _GAME_.Scripts.Player
         {
             if (pickUpObj.TryGetComponent(out Rigidbody rb)) 
             {
+                _pickedInteractable.IsPickedUp = true;
                 rb.useGravity =false;
                 rb.transform.parent = objHoldPos.transform;
                 _previousLayer = pickUpObj.layer;
@@ -111,6 +113,8 @@ namespace _GAME_.Scripts.Player
         void DropObject()
         {
             _pickedInteractable.InteractRigidbody.useGravity = true;
+            _pickedInteractable.InteractRigidbody.linearVelocity = Vector3.zero;
+            _pickedInteractable.IsPickedUp = false;
             Physics.IgnoreCollision(_pickedInteractable.InteractObject.GetComponent<Collider>(), GetComponent<CharacterController>(), false);
             _pickedInteractable.InteractObject.layer = _previousLayer; 
             _pickedInteractable.InteractObject.transform.parent = null; 
@@ -123,6 +127,8 @@ namespace _GAME_.Scripts.Player
         }
         void ThrowObject()
         {
+            _pickedInteractable.InteractRigidbody.linearVelocity = Vector3.zero;
+            _pickedInteractable.IsPickedUp = false;
             _pickedInteractable.InteractRigidbody.useGravity = true;
             Physics.IgnoreCollision(_pickedInteractable.InteractObject.GetComponent<Collider>(), GetComponent<CharacterController>(), false);
             _pickedInteractable.InteractObject.layer = _previousLayer;

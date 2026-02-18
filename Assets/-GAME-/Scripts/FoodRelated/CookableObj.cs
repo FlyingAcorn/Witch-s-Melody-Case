@@ -1,11 +1,10 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace _GAME_.Scripts.FoodRelated
 {
-    public class CookedObj : MonoBehaviour,IInteractable
+    public class CookableObj : MonoBehaviour,IInteractable
     {
         private enum FoodState
         {
@@ -35,6 +34,8 @@ namespace _GAME_.Scripts.FoodRelated
         public bool IsInteractable => isInteractable;
         public bool CanBePickedUp => canBePickedUp;
         public bool IsSharp => isSharp;
+        public bool IsPickedUp { get; set; }
+
         public void Interact()
         {
         }
@@ -44,6 +45,10 @@ namespace _GAME_.Scripts.FoodRelated
             UpdateFoodState(FoodState.Raw);
             _rigidbody = GetComponent<Rigidbody>();
             _interactCollider  = GetComponent<Collider>();
+        }
+
+        private void Start()
+        {
         }
 
         private void UpdateFoodState(FoodState state)
@@ -84,7 +89,7 @@ namespace _GAME_.Scripts.FoodRelated
         
         private void OnTriggerEnter(Collider other)
         {
-            if (other.TryGetComponent<Stove>(out Stove _))
+            if (other.TryGetComponent(out Grill _))
             {
                 _currentCoroutine = StartCoroutine(Cooking());
             }
@@ -92,7 +97,7 @@ namespace _GAME_.Scripts.FoodRelated
 
         private void OnTriggerExit(Collider other)
         {
-            if (!other.TryGetComponent<Stove>(out Stove _)) return;
+            if (!other.TryGetComponent(out Grill _)) return;
             if (_currentCoroutine == null) return;
             StopCoroutine(_currentCoroutine);
             _currentCoroutine = null;

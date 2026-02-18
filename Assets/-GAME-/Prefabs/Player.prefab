@@ -469,6 +469,9 @@ MonoBehaviour:
   targetLayer: 7
   objHoldPos: {fileID: 2032726888769756269}
   myInputActionAsset: {fileID: -944628639613478452, guid: 64a5292c3bc77b74bb9a28263b938f63, type: 3}
+  objectLayer:
+    serializedVersion: 2
+    m_Bits: 64
   interactionState:
     m_PersistentCalls:
       m_Calls:
