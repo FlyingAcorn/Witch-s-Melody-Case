@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 1317583612061275961}
   - component: {fileID: 1058289987956831756}
   - component: {fileID: 4963873972298665641}
-  - component: {fileID: 7451605952837560416}
   - component: {fileID: 2845212399825864015}
   - component: {fileID: 7860818969718999488}
+  - component: {fileID: 3100449690800147456}
   m_Layer: 6
   m_Name: Chicken
   m_TagString: Untagged
@@ -93,30 +93,6 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &7451605952837560416
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2201347939388341860}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b2de3e4a387b6df4f9c67a11cc096742, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CookedObj
-  objectInteractMessage: aa
-  isInteractable: 0
-  canBePickedUp: 1
-  isSharp: 0
-  myRenderer: {fileID: 4963873972298665641}
-  cookTime: 5
-  burnTime: 10
-  currentFoodState: 0
-  foodStateMaterials:
-  - {fileID: 2100000, guid: 02cda4753f4cbea40bfff67aaa0e5383, type: 2}
-  - {fileID: 2100000, guid: adc17c466a5da1e448bbe13304e7ddd0, type: 2}
-  - {fileID: 2100000, guid: 8f9842cff70e7404387d2a89b0ac7ef9, type: 2}
 --- !u!54 &2845212399825864015
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -166,3 +142,28 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 8678471803060331641, guid: e95e289d7cea99e4db38d73a7a27a81a, type: 3}
+--- !u!114 &3100449690800147456
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2201347939388341860}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f92d8e1063af9784e887d8bbbcd5f62e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Chicken
+  objectInteractMessage: Chicken
+  isInteractable: 0
+  canBePickedUp: 1
+  isSharp: 0
+  foodType: 1
+  myRenderer: {fileID: 4963873972298665641}
+  cookTime: 5
+  burnTime: 10
+  currentFoodState: 0
+  foodStateMaterials:
+  - {fileID: 2100000, guid: 02cda4753f4cbea40bfff67aaa0e5383, type: 2}
+  - {fileID: 2100000, guid: adc17c466a5da1e448bbe13304e7ddd0, type: 2}
+  - {fileID: 2100000, guid: 8f9842cff70e7404387d2a89b0ac7ef9, type: 2}

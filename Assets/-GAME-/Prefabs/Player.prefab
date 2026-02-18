@@ -475,9 +475,9 @@ MonoBehaviour:
   interactionState:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 102900000, guid: c7f2cb90e7599f8428be7b859b58e6e5, type: 3}
         m_TargetAssemblyTypeName: Crosshair, Assembly-CSharp
-        m_MethodName: ChangeCrosshair
+        m_MethodName: 
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

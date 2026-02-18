@@ -1,17 +1,19 @@
 using System;
+using _GAME_.Scripts.FoodRelated.HolderIngredient;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace _GAME_.Scripts.FoodRelated
 {
     public class CuttingBoard : MonoBehaviour
     {
         [SerializeField] private Transform holdPos;
-        [SerializeField] private RecipeFood _heldObject;
+        [SerializeField] private RecipeFood heldObject;
 
         private void FixedUpdate()
         {
-            if (_heldObject == null) return;
-            if (!_heldObject.IsPickedUp)
+            if (heldObject == null) return;
+            if (!heldObject.IsPickedUp)
             {
                 MoveToPos();
             }
@@ -19,29 +21,31 @@ namespace _GAME_.Scripts.FoodRelated
 
         private void MoveToPos()
         {
-            if(_heldObject.RigidBody.useGravity) _heldObject.RigidBody.useGravity = false;
-            _heldObject.transform.position = 
-                Vector3.MoveTowards(_heldObject.transform.position,holdPos.position,2f * Time.fixedDeltaTime);
-            var direction =holdPos.position-_heldObject.transform.position;
+            if(heldObject.RigidBody.useGravity) heldObject.RigidBody.useGravity = false;
+            heldObject.transform.position = 
+                Vector3.MoveTowards(heldObject.transform.position,holdPos.position,4f * Time.fixedDeltaTime);
+            var direction =holdPos.position-heldObject.transform.position;
             var toRotation = Quaternion.Euler(direction);
-            _heldObject.transform.rotation = Quaternion.Slerp(_heldObject.transform.rotation, toRotation,2f * Time.fixedDeltaTime);
+            heldObject.transform.rotation = Quaternion.Lerp(heldObject.transform.rotation, toRotation,4f * Time.fixedDeltaTime);
         }
         
         private void OnTriggerEnter(Collider obj)
         {
-            if (obj.TryGetComponent(out RecipeFood food) && _heldObject == null && !food.IsPickedUp)
+            if (obj.TryGetComponent(out RecipeFood food) && heldObject == null && !food.IsPickedUp)
             {
-                _heldObject = food;
-                _heldObject.CanBeThrown = false;
+                food.OnCuttingBoard = true;
+                heldObject = food;
+                heldObject.CanBeThrown = false;
                 food.RigidBody.linearVelocity = Vector3.zero;
             }
         }
         private void OnTriggerExit(Collider obj)
         {
-            if (obj.TryGetComponent(out RecipeFood food) && _heldObject == food && food.IsPickedUp)
+            if (obj.TryGetComponent(out RecipeFood food) && heldObject == food && food.IsPickedUp)
             {
-                _heldObject.CanBeThrown = true;
-                _heldObject = null;
+                food.OnCuttingBoard = false;
+                heldObject.CanBeThrown = true;
+                heldObject = null;
             }
         }
     }

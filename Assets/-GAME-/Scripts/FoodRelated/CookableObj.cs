@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace _GAME_.Scripts.FoodRelated
 {
-    public class CookableObj : Interactable
+    public abstract class CookableObj : Food
     {
         private enum FoodState
         {

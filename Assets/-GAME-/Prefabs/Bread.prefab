@@ -11,10 +11,10 @@ GameObject:
   - component: {fileID: 3460729795758605710}
   - component: {fileID: 5312541501567332335}
   - component: {fileID: 4083224289635620213}
-  - component: {fileID: 1100926887010557627}
   - component: {fileID: 4737373154386227416}
   - component: {fileID: 4380050982698081340}
   - component: {fileID: 8096142753355636705}
+  - component: {fileID: 4066489289199375159}
   m_Layer: 6
   m_Name: Bread
   m_TagString: Untagged
@@ -94,22 +94,6 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &1100926887010557627
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1810861457671645480}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 05ecf2b3d3ff4ba49a1b674030baef17, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::_GAME_.Scripts.FoodRelated.RecipeFood
-  objectInteractMessage: Bread
-  isInteractable: 0
-  canBePickedUp: 1
-  isSharp: 0
 --- !u!54 &4737373154386227416
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -180,3 +164,24 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.4, y: 0.3, z: 0.3}
   m_Center: {x: -0.000000029802322, y: 0.06987536, z: -0.0010982715}
+--- !u!114 &4066489289199375159
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1810861457671645480}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8264b70b66da54a4fb412d190db2391e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::_GAME_.Scripts.FoodRelated.HolderIngredient.Bread
+  objectInteractMessage: Bread
+  isInteractable: 0
+  canBePickedUp: 1
+  isSharp: 0
+  foodType: 0
+  foodsInside: 
+  allowedMainIngredients: 
+  allowedFillings: 
+  allowedSauces: 

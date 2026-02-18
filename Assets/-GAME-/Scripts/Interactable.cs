@@ -23,6 +23,5 @@ namespace _GAME_.Scripts
         {
             
         }
-        
     }
 }
