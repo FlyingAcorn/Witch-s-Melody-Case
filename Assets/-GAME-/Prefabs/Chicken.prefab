@@ -105,11 +105,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2de3e4a387b6df4f9c67a11cc096742, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CookedObj
-  myRenderer: {fileID: 4963873972298665641}
   objectInteractMessage: aa
   isInteractable: 0
   canBePickedUp: 1
   isSharp: 0
+  myRenderer: {fileID: 4963873972298665641}
   cookTime: 5
   burnTime: 10
   currentFoodState: 0
@@ -143,7 +143,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 1
+  m_CollisionDetection: 0
 --- !u!64 &7860818969718999488
 MeshCollider:
   m_ObjectHideFlags: 0
