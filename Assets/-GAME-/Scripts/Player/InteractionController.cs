@@ -15,8 +15,8 @@ namespace _GAME_.Scripts.Player
         [SerializeField] private float throwForce = 500f;
         [SerializeField] private int targetLayer;
         [SerializeField] private Transform objHoldPos;
-        private IInteractable _currentTargetedInteractable;
-        private IInteractable _pickedInteractable;
+        private Interactable _currentTargetedInteractable;
+        private Interactable _pickedInteractable;
         [SerializeField] private InputActionAsset myInputActionAsset;
         private InputAction _pickupAction;
         private InputAction _throwAction;
@@ -53,13 +53,13 @@ namespace _GAME_.Scripts.Player
         {
             if (_pickupAction.WasReleasedThisFrame() && _currentTargetedInteractable != null && _pickedInteractable == null )
             {
-                if (_currentTargetedInteractable.CanBePickedUp) 
+                if (_currentTargetedInteractable.canBePickedUp) 
                 {
                     _pickedInteractable= _currentTargetedInteractable;
-                    PickUpObject(_pickedInteractable.InteractObject);
+                    PickUpObject(_pickedInteractable.gameObject);
                     interactionState?.Invoke(1); 
                 }
-                else if (_currentTargetedInteractable.IsInteractable)
+                else if (_currentTargetedInteractable.isInteractable)
                 {
                     _currentTargetedInteractable.Interact();
                 }
@@ -75,7 +75,7 @@ namespace _GAME_.Scripts.Player
                 ThrowObject();
                 interactionState?.Invoke(0);
             }
-            if (_interactAction.IsPressed()&& _pickedInteractable.IsInteractable)
+            if (_interactAction.IsPressed()&& _pickedInteractable.isInteractable)
             {
                 _pickedInteractable.Interact();
             }
@@ -88,14 +88,14 @@ namespace _GAME_.Scripts.Player
                 interactionText.text = String.Empty;
                 return;
             }
-            interactionText.text = _currentTargetedInteractable.InteractMessage;
+            interactionText.text = _currentTargetedInteractable.objectInteractMessage;
         }
 
         private void UpdateCurrentInteractable()
         {
             var ray = playerCamera.ViewportPointToRay(new Vector2(0.5f, 0.5f));
             Physics.Raycast(ray, out var hit, interactionRange, objectLayer);
-            _currentTargetedInteractable = hit.collider?.GetComponent<IInteractable>();
+            _currentTargetedInteractable = hit.collider?.GetComponent<Interactable>();
         }
         
         void PickUpObject(GameObject pickUpObj)
@@ -112,28 +112,28 @@ namespace _GAME_.Scripts.Player
         }
         void DropObject()
         {
-            _pickedInteractable.InteractRigidbody.useGravity = true;
-            _pickedInteractable.InteractRigidbody.linearVelocity = Vector3.zero;
+            _pickedInteractable.RigidBody.useGravity = true;
+            _pickedInteractable.RigidBody.linearVelocity = Vector3.zero;
             _pickedInteractable.IsPickedUp = false;
-            Physics.IgnoreCollision(_pickedInteractable.InteractObject.GetComponent<Collider>(), GetComponent<CharacterController>(), false);
-            _pickedInteractable.InteractObject.layer = _previousLayer; 
-            _pickedInteractable.InteractObject.transform.parent = null; 
+            Physics.IgnoreCollision(_pickedInteractable.gameObject.GetComponent<Collider>(), GetComponent<CharacterController>(), false);
+            _pickedInteractable.gameObject.layer = _previousLayer; 
+            _pickedInteractable.gameObject.transform.parent = null; 
             _pickedInteractable = null; 
         }
         void MoveObject()
         {
-            _pickedInteractable.InteractObject.transform.position =
-                Vector3.MoveTowards(_pickedInteractable.InteractObject.transform.position,objHoldPos.position,10f * Time.fixedDeltaTime);
+            _pickedInteractable.gameObject.transform.position =
+                Vector3.MoveTowards(_pickedInteractable.gameObject.transform.position,objHoldPos.position,10f * Time.fixedDeltaTime);
         }
         void ThrowObject()
         {
-            _pickedInteractable.InteractRigidbody.linearVelocity = Vector3.zero;
+            _pickedInteractable.RigidBody.linearVelocity = Vector3.zero;
             _pickedInteractable.IsPickedUp = false;
-            _pickedInteractable.InteractRigidbody.useGravity = true;
-            Physics.IgnoreCollision(_pickedInteractable.InteractObject.GetComponent<Collider>(), GetComponent<CharacterController>(), false);
-            _pickedInteractable.InteractObject.layer = _previousLayer;
-            _pickedInteractable.InteractObject.transform.parent = null;
-            _pickedInteractable.InteractRigidbody.AddForce(transform.forward * throwForce); // sharpsa farklı yapsın
+            _pickedInteractable.RigidBody.useGravity = true;
+            Physics.IgnoreCollision(_pickedInteractable.gameObject.GetComponent<Collider>(), GetComponent<CharacterController>(), false);
+            _pickedInteractable.gameObject.layer = _previousLayer;
+            _pickedInteractable.gameObject.transform.parent = null;
+            _pickedInteractable.RigidBody.AddForce(transform.forward * throwForce); // sharpsa farklı yapsın
             _pickedInteractable = null;
         }
     }

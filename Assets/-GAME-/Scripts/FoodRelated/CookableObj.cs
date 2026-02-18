@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace _GAME_.Scripts.FoodRelated
 {
-    public class CookableObj : MonoBehaviour,IInteractable
+    public class CookableObj : Interactable
     {
         private enum FoodState
         {
@@ -13,38 +13,21 @@ namespace _GAME_.Scripts.FoodRelated
             Burned
         }
         [SerializeField] private Renderer myRenderer;
-        [Header("ObjectConfigurations")] 
-        [SerializeField] private string objectInteractMessage;
-        [SerializeField] private bool isInteractable;
-        [SerializeField] private bool canBePickedUp;
-        [SerializeField] private bool isSharp;
         [Header("FoodConfigurations")] 
         [SerializeField] private int cookTime;
         [SerializeField] private int burnTime;
         [SerializeField] private FoodState currentFoodState;
         [SerializeField] private List<Material> foodStateMaterials;
         private Coroutine _currentCoroutine;
-        private Rigidbody _rigidbody;
-        private Collider _interactCollider;
-        
-        public string InteractMessage => objectInteractMessage;
-        public GameObject InteractObject => gameObject;
-        public Rigidbody InteractRigidbody => _rigidbody;
-        public Collider InteractCollider => _interactCollider;
-        public bool IsInteractable => isInteractable;
-        public bool CanBePickedUp => canBePickedUp;
-        public bool IsSharp => isSharp;
-        public bool IsPickedUp { get; set; }
 
-        public void Interact()
+        public override void Interact()
         {
         }
 
-        private void Awake()
+        protected override void Awake()
         {
+            base.Awake();
             UpdateFoodState(FoodState.Raw);
-            _rigidbody = GetComponent<Rigidbody>();
-            _interactCollider  = GetComponent<Collider>();
         }
 
         private void Start()

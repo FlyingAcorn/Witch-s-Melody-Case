@@ -6,7 +6,7 @@ namespace _GAME_.Scripts.FoodRelated
     public class CuttingBoard : MonoBehaviour
     {
         [SerializeField] private Transform holdPos;
-        private RecipeFood _heldObject;
+        [SerializeField] private RecipeFood _heldObject;
 
         private void FixedUpdate()
         {
@@ -19,7 +19,7 @@ namespace _GAME_.Scripts.FoodRelated
 
         private void MoveToPos()
         {
-            if(_heldObject.InteractRigidbody.useGravity) _heldObject.InteractRigidbody.useGravity = false;
+            if(_heldObject.RigidBody.useGravity) _heldObject.RigidBody.useGravity = false;
             _heldObject.transform.position = 
                 Vector3.MoveTowards(_heldObject.transform.position,holdPos.position,2f * Time.fixedDeltaTime);
             var direction =holdPos.position-_heldObject.transform.position;
@@ -29,17 +29,16 @@ namespace _GAME_.Scripts.FoodRelated
         
         private void OnTriggerEnter(Collider obj)
         {
-            if (obj.TryGetComponent(out RecipeFood food) && _heldObject == null)
+            if (obj.TryGetComponent(out RecipeFood food) && _heldObject == null && !food.IsPickedUp)
             {
-                food.InteractRigidbody.linearVelocity = Vector3.zero;
                 _heldObject = food;
+                food.RigidBody.linearVelocity = Vector3.zero;
             }
         }
         private void OnTriggerExit(Collider obj)
         {
-            if (obj.TryGetComponent(out RecipeFood food) && _heldObject == food )
+            if (obj.TryGetComponent(out RecipeFood food) && _heldObject == food && food.IsPickedUp) //specific bug var gösterirsin
             {
-                if(!_heldObject.IsPickedUp) _heldObject.InteractRigidbody.useGravity = true;
                 _heldObject = null;
             }
         }
