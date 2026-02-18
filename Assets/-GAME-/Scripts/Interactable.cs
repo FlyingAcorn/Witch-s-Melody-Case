@@ -10,6 +10,7 @@ namespace _GAME_.Scripts
         [SerializeField] public bool isInteractable;
         [SerializeField] public bool canBePickedUp;
         [NonSerialized] public bool IsPickedUp;
+        [NonSerialized] public bool CanBeThrown;
         [SerializeField] public bool isSharp;
         [NonSerialized] public Rigidbody RigidBody;
         

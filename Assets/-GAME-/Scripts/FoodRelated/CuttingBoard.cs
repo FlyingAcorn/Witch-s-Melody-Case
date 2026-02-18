@@ -32,13 +32,15 @@ namespace _GAME_.Scripts.FoodRelated
             if (obj.TryGetComponent(out RecipeFood food) && _heldObject == null && !food.IsPickedUp)
             {
                 _heldObject = food;
+                _heldObject.CanBeThrown = false;
                 food.RigidBody.linearVelocity = Vector3.zero;
             }
         }
         private void OnTriggerExit(Collider obj)
         {
-            if (obj.TryGetComponent(out RecipeFood food) && _heldObject == food && food.IsPickedUp) //specific bug var gösterirsin
+            if (obj.TryGetComponent(out RecipeFood food) && _heldObject == food && food.IsPickedUp)
             {
+                _heldObject.CanBeThrown = true;
                 _heldObject = null;
             }
         }

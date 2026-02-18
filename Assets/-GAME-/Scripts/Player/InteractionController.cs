@@ -57,7 +57,7 @@ namespace _GAME_.Scripts.Player
                 {
                     _pickedInteractable= _currentTargetedInteractable;
                     PickUpObject(_pickedInteractable.gameObject);
-                    interactionState?.Invoke(1); 
+                    
                 }
                 else if (_currentTargetedInteractable.isInteractable)
                 {
@@ -67,13 +67,13 @@ namespace _GAME_.Scripts.Player
             else if (_pickupAction.WasReleasedThisFrame() && _pickedInteractable != null)
             {
                 DropObject();
-                interactionState?.Invoke(0);
+                
             }
             if (_pickedInteractable == null) return;
             if (_throwAction.WasReleasedThisFrame())
             {
                 ThrowObject();
-                interactionState?.Invoke(0);
+              
             }
             if (_interactAction.IsPressed()&& _pickedInteractable.isInteractable)
             {
@@ -108,6 +108,7 @@ namespace _GAME_.Scripts.Player
                 _previousLayer = pickUpObj.layer;
                 pickUpObj.layer = targetLayer;
                 Physics.IgnoreCollision(pickUpObj.GetComponent<Collider>(), GetComponent<CharacterController>(), true);
+                interactionState?.Invoke(1); 
             }
         }
         void DropObject()
@@ -119,6 +120,7 @@ namespace _GAME_.Scripts.Player
             _pickedInteractable.gameObject.layer = _previousLayer; 
             _pickedInteractable.gameObject.transform.parent = null; 
             _pickedInteractable = null; 
+            interactionState?.Invoke(0);
         }
         void MoveObject()
         {
@@ -127,6 +129,7 @@ namespace _GAME_.Scripts.Player
         }
         void ThrowObject()
         {
+            if (!_pickedInteractable.CanBeThrown) return;
             _pickedInteractable.RigidBody.linearVelocity = Vector3.zero;
             _pickedInteractable.IsPickedUp = false;
             _pickedInteractable.RigidBody.useGravity = true;
@@ -135,6 +138,7 @@ namespace _GAME_.Scripts.Player
             _pickedInteractable.gameObject.transform.parent = null;
             _pickedInteractable.RigidBody.AddForce(transform.forward * throwForce); // sharpsa farklı yapsın
             _pickedInteractable = null;
+            interactionState?.Invoke(0);
         }
     }
 }
