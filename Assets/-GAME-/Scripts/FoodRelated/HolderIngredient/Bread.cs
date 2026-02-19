@@ -1,6 +1,6 @@
 namespace _GAME_.Scripts.FoodRelated.HolderIngredient
 {
-    public class Bread : RecipeFood
+    public class Bread : Food
     {
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         void Start()

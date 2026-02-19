@@ -21,15 +21,10 @@ namespace _GAME_.Scripts.FoodRelated
         private Coroutine _currentCoroutine;
         private Food _food;
         
-
         private void Awake()
         {
             _food = GetComponent<Food>();
             UpdateFoodState(FoodState.Raw);
-        }
-
-        private void Start()
-        {
         }
 
         private void UpdateFoodState(FoodState state)

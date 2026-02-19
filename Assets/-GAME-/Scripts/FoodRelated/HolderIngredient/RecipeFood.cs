@@ -1,38 +1,44 @@
 using System;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.Serialization;
 
 namespace _GAME_.Scripts.FoodRelated.HolderIngredient
 {
-    public abstract class RecipeFood : Food
+    public class RecipeFood : MonoBehaviour
     {
-        [SerializeField] protected List<FoodList> foodsInside;
+        [SerializeField] private Transform centerPos;
+        [NonSerialized] public Food MyFood;
+        [SerializeField] private List<Food.FoodList> foodsInside;
         [Header("RecipeConfigurations")] 
-        [SerializeField] protected List<FoodList> allowedMainIngredients;
-        [SerializeField] protected List<FoodList> allowedFillings;
-        [SerializeField] protected List<FoodList> allowedSauces; // sauces will cast a ray to check
-         private bool _mainIngredientSelected;
-         [NonSerialized] public bool OnCuttingBoard;
-         //TODO: arrange protected private  keys of scripts
-        protected override void Awake()
-        {
-            base.Awake();
-        }
-        public override void Interact()
-        {
-        }
-        // recipefood + cookable obj (check if cooked)+ 2filling(max)+2 sauce (max)
+        [SerializeField] private List<Food.FoodList> allowedMainIngredients;
+        [SerializeField] private List<Food.FoodList> allowedFillings;
+        [SerializeField] private List<Food.FoodList> allowedSauces; // sauces will cast a ray to check
+        private bool _mainIngredientSelected;
+        [NonSerialized] public bool OnCuttingBoard;
+        
+         private void Awake()
+         {
+             MyFood  = GetComponent<Food>();
+         }
 
-        private void OnTriggerEnter(Collider other)
+         private void OnTriggerStay(Collider other)
         {
             if (!OnCuttingBoard) return;
-            if (other.TryGetComponent(out Food food) && CheckFood(food))
+            if (other.TryGetComponent(out Food food) && CheckFood(food) && !food.IsPickedUp)
             {
-                
                 if (allowedMainIngredients.Contains(food.foodType)) _mainIngredientSelected  = true;
                 foodsInside.Add(food.foodType);
+                MoveFood(food);
             }
+        }
+
+        private void MoveFood(Food food)
+        {
+            food.GetComponent<Rigidbody>().linearVelocity = Vector3.zero;
+            food.GetComponent<Collider>().enabled = false;
+            food.transform.DOMove(centerPos.position, 0.1f).OnComplete(() => {food.gameObject.SetActive(false);});
         }
 
         private bool CheckFood(Food food)
@@ -44,6 +50,5 @@ namespace _GAME_.Scripts.FoodRelated.HolderIngredient
                 return true;
         }
         //TODO: sauces will have their own separate method
-        //TODO: DO movement of the pieces
     }
 }

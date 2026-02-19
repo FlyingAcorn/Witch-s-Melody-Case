@@ -16,10 +16,5 @@ namespace _GAME_.Scripts.FoodRelated
         }
         [SerializeField] public FoodList foodType;
         [NonSerialized] public bool IsCooked;
-        
-
-        
-        //TODO: can be cooked can be fried like booleans to check
-        
     }
 }
