@@ -68,7 +68,7 @@ namespace _GAME_.Scripts.FoodRelated.CookedFood
         
         private void OnTriggerEnter(Collider other)
         {
-            if (other.TryGetComponent(out Grill _))
+            if (other.TryGetComponent(out Cooker _))
             {
                 _currentCoroutine = StartCoroutine(Cooking());
             }
@@ -76,7 +76,7 @@ namespace _GAME_.Scripts.FoodRelated.CookedFood
 
         private void OnTriggerExit(Collider other)
         {
-            if (!other.TryGetComponent(out Grill _)) return;
+            if (!other.TryGetComponent(out Cooker _)) return;
             if (_currentCoroutine == null) return;
             StopCoroutine(_currentCoroutine);
             _currentCoroutine = null;

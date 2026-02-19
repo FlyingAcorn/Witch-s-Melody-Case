@@ -1,23 +1,25 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using _GAME_.Scripts.FoodRelated.CookedFood;
 using DG.Tweening;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace _GAME_.Scripts.FoodRelated.HolderIngredient
 {
     public class RecipeFood : MonoBehaviour
     {
+        [Header("References")] 
         [SerializeField] private Transform centerPos;
         [NonSerialized] public Food MyFood;
-        [SerializeField] private List<Food.FoodList> foodsInside;
+        [SerializeField] private List<FoodMeshInfo> meshReferences;
         [Header("RecipeConfigurations")] 
         [SerializeField] private List<Food.FoodList> allowedMainIngredients;
         [SerializeField] private List<Food.FoodList> allowedFillings;
         [SerializeField] private List<Food.FoodList> allowedSauces; // sauces will cast a ray to check
         private bool _mainIngredientSelected;
         [NonSerialized] public bool OnCuttingBoard;
+        [SerializeField] private List<Food.FoodList> foodsInside;
         
          private void Awake()
          {
@@ -39,7 +41,14 @@ namespace _GAME_.Scripts.FoodRelated.HolderIngredient
         {
             food.GetComponent<Rigidbody>().linearVelocity = Vector3.zero;
             food.GetComponent<Collider>().enabled = false;
-            food.transform.DOMove(centerPos.position, 0.1f).OnComplete(() => {food.gameObject.SetActive(false);});
+            food.transform.DOMove(centerPos.position, 0.1f).OnComplete(() =>
+            {
+                food.gameObject.SetActive(false);
+                foreach (var meshInfo in meshReferences.Where(meshInfo => meshInfo.myType == food.foodType))
+                {
+                    meshInfo.gameObject.SetActive(true);
+                }
+            });
         }
 
         private bool CheckFood(Food food)

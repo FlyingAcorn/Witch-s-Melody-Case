@@ -13,7 +13,6 @@ namespace _GAME_.Scripts.Player
         [SerializeField] private TextMeshProUGUI interactionText;
         [SerializeField] private float interactionRange = 5f;
         [SerializeField] private float throwForce = 500f;
-        [SerializeField] private int targetLayer;
         [SerializeField] private Transform objHoldPos;
         private Interactable _currentTargetedInteractable;
         private Interactable _pickedInteractable;
@@ -21,7 +20,6 @@ namespace _GAME_.Scripts.Player
         private InputAction _pickupAction;
         private InputAction _throwAction;
         private InputAction _interactAction;
-        private int _previousLayer;
         [SerializeField] private LayerMask objectLayer;
         
         //Events
@@ -105,8 +103,6 @@ namespace _GAME_.Scripts.Player
                 _pickedInteractable.IsPickedUp = true;
                 rb.useGravity =false;
                 rb.transform.parent = objHoldPos.transform;
-                _previousLayer = pickUpObj.layer;
-                pickUpObj.layer = targetLayer;
                 Physics.IgnoreCollision(pickUpObj.GetComponent<Collider>(), GetComponent<CharacterController>(), true);
                 interactionState?.Invoke(1); 
             }
@@ -117,7 +113,6 @@ namespace _GAME_.Scripts.Player
             _pickedInteractable.RigidBody.linearVelocity = Vector3.zero;
             _pickedInteractable.IsPickedUp = false;
             Physics.IgnoreCollision(_pickedInteractable.gameObject.GetComponent<Collider>(), GetComponent<CharacterController>(), false);
-            _pickedInteractable.gameObject.layer = _previousLayer; 
             _pickedInteractable.gameObject.transform.parent = null; 
             _pickedInteractable = null; 
             interactionState?.Invoke(0);
@@ -134,7 +129,6 @@ namespace _GAME_.Scripts.Player
             _pickedInteractable.IsPickedUp = false;
             _pickedInteractable.RigidBody.useGravity = true;
             Physics.IgnoreCollision(_pickedInteractable.gameObject.GetComponent<Collider>(), GetComponent<CharacterController>(), false);
-            _pickedInteractable.gameObject.layer = _previousLayer;
             _pickedInteractable.gameObject.transform.parent = null;
             _pickedInteractable.RigidBody.AddForce(transform.forward * throwForce); // sharpsa farklı yapsın
             _pickedInteractable = null;

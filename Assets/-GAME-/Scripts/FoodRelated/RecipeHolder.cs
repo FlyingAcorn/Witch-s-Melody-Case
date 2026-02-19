@@ -1,12 +1,9 @@
-using System;
 using _GAME_.Scripts.FoodRelated.HolderIngredient;
-using JetBrains.Annotations;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace _GAME_.Scripts.FoodRelated
 {
-    public class CuttingBoard : MonoBehaviour
+    public class RecipeHolder : MonoBehaviour
     {
         [SerializeField] private Transform holdPos;
         private RecipeFood _heldObject;

@@ -18,7 +18,7 @@ namespace _GAME_.Scripts.FoodRelated
             Mustard
             
         }
-        [SerializeField] public FoodList foodType;
+        public FoodList foodType;
         [NonSerialized] public bool IsCooked;
     }
 }
