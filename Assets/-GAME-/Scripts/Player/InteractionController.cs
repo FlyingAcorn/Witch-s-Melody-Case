@@ -100,6 +100,7 @@ namespace _GAME_.Scripts.Player
         {
             if (pickUpObj.TryGetComponent(out Rigidbody rb)) 
             {
+                rb.isKinematic = false;
                 _pickedInteractable.IsPickedUp = true;
                 rb.useGravity =false;
                 rb.transform.parent = objHoldPos.transform;
@@ -124,7 +125,6 @@ namespace _GAME_.Scripts.Player
         }
         void ThrowObject()
         {
-            if (!_pickedInteractable.CanBeThrown) return;
             _pickedInteractable.RigidBody.linearVelocity = Vector3.zero;
             _pickedInteractable.IsPickedUp = false;
             _pickedInteractable.RigidBody.useGravity = true;

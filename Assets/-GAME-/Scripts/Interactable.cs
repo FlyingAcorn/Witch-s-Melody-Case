@@ -10,7 +10,6 @@ namespace _GAME_.Scripts
         public bool isInteractable;
         public bool canBePickedUp;
         [NonSerialized] public bool IsPickedUp;
-        [NonSerialized] public bool CanBeThrown = true;
         public bool isSharp;
         [NonSerialized] public Rigidbody RigidBody;
         
