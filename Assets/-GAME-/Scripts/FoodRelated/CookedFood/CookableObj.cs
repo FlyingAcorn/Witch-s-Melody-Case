@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace _GAME_.Scripts.FoodRelated
+namespace _GAME_.Scripts.FoodRelated.CookedFood
 {
     public class CookableObj : MonoBehaviour
     {

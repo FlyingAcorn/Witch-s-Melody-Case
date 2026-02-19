@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &3834869789419601406
+--- !u!1 &4270915766177445431
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,49 +8,49 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 6868060187337088496}
-  - component: {fileID: 7419768690009245155}
-  - component: {fileID: 441032100184806453}
-  - component: {fileID: 7408735929847558455}
-  - component: {fileID: 4985572540075607456}
-  - component: {fileID: 1434868795709326290}
+  - component: {fileID: 8958479960544370310}
+  - component: {fileID: 5682818657913066519}
+  - component: {fileID: 592039671516754079}
+  - component: {fileID: 7791959741651588582}
+  - component: {fileID: 5407603716993359384}
+  - component: {fileID: 8462897002422821393}
   m_Layer: 6
-  m_Name: Cheddar
+  m_Name: Tomato
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &6868060187337088496
+--- !u!4 &8958479960544370310
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3834869789419601406}
+  m_GameObject: {fileID: 4270915766177445431}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.519864, y: 1.2644005, z: -8.349986}
+  m_LocalPosition: {x: 4.48622, y: 0.875, z: -5.8899}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &7419768690009245155
+--- !u!33 &5682818657913066519
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3834869789419601406}
-  m_Mesh: {fileID: -5011883519269594103, guid: 7ad53f0fe427cc044b7ecda6e1be7473, type: 3}
---- !u!23 &441032100184806453
+  m_GameObject: {fileID: 4270915766177445431}
+  m_Mesh: {fileID: -1340541719380434750, guid: 26d193f41254a694cb51d724d88ea32c, type: 3}
+--- !u!23 &592039671516754079
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3834869789419601406}
+  m_GameObject: {fileID: 4270915766177445431}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -69,7 +69,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 79088643fa020584f9942a85270fb304, type: 2}
+  - {fileID: 2100000, guid: 3dc2799ebef9a394faa2d5cc01d7d16c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -93,51 +93,13 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &7408735929847558455
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3834869789419601406}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c40ad71a35d41f4185da744ea13efd5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Cheddar
-  objectInteractMessage: Cheddar
-  isInteractable: 0
-  canBePickedUp: 1
-  isSharp: 0
-  foodType: 4
---- !u!65 &4985572540075607456
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3834869789419601406}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.14097439, y: 0.005995787, z: 0.14097439}
-  m_Center: {x: 0, y: 0.0029978936, z: 0}
---- !u!54 &1434868795709326290
+--- !u!54 &7791959741651588582
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3834869789419601406}
+  m_GameObject: {fileID: 4270915766177445431}
   serializedVersion: 5
   m_Mass: 1
   m_LinearDamping: 0
@@ -158,3 +120,41 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!65 &5407603716993359384
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4270915766177445431}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.13124701, y: 0.008491576, z: 0.13800126}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &8462897002422821393
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4270915766177445431}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e4acc7298056c64fbd56d79c8cbca27, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::_GAME_.Scripts.FoodRelated.Fillings.Tomato
+  objectInteractMessage: Tomato
+  isInteractable: 0
+  canBePickedUp: 1
+  isSharp: 0
+  foodType: 6

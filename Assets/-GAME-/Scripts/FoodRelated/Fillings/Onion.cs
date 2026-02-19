@@ -1,7 +1,8 @@
+using UnityEngine;
+
 namespace _GAME_.Scripts.FoodRelated.Fillings
 {
-    public class Cheddar : Food
+    public class Onion : Food
     {
-        
     }
 }

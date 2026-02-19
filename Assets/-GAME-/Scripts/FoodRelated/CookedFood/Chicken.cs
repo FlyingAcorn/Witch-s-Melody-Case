@@ -1,4 +1,4 @@
-namespace _GAME_.Scripts.FoodRelated
+namespace _GAME_.Scripts.FoodRelated.CookedFood
 {
     public class Chicken : Food
     {

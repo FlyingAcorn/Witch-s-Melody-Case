@@ -1,7 +1,8 @@
+using UnityEngine;
+
 namespace _GAME_.Scripts.FoodRelated.Fillings
 {
-    public abstract class Filling : Food
+    public class Tomato : Food
     {
-        
     }
 }

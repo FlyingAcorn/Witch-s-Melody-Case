@@ -9,10 +9,14 @@ namespace _GAME_.Scripts.FoodRelated
         {
             Bread,
             Chicken,
+            Beef,
             Lettuce,
             Cheddar,
+            Onion,
+            Tomato,
             Ketchup,
             Mustard
+            
         }
         [SerializeField] public FoodList foodType;
         [NonSerialized] public bool IsCooked;
