@@ -27,19 +27,21 @@ namespace _GAME_.Scripts.FoodRelated.HolderIngredient
         private void OnTriggerEnter(Collider other)
         {
             if (!OnCuttingBoard) return;
-            if (other.TryGetComponent(out Food food) && CheckFood(food.foodType))
+            if (other.TryGetComponent(out Food food) && CheckFood(food))
             {
+                
                 if (allowedMainIngredients.Contains(food.foodType)) _mainIngredientSelected  = true;
                 foodsInside.Add(food.foodType);
             }
         }
 
-        private bool CheckFood(FoodList food)
+        private bool CheckFood(Food food)
         {
-            if (foodsInside.Contains(food)) return false;
-            if (!allowedMainIngredients.Contains(food) && !allowedFillings.Contains(food)) return false;
-            if (allowedMainIngredients.Contains(food) && _mainIngredientSelected) return false;
-            return true;
+            if (foodsInside.Contains(food.foodType)) return false;
+            if (!allowedMainIngredients.Contains(food.foodType) && !allowedFillings.Contains(food.foodType)) return false;
+            if (allowedMainIngredients.Contains(food.foodType) && _mainIngredientSelected) return false;
+            if (food.TryGetComponent(out CookableObj _) && !food.IsCooked)  return false;
+                return true;
         }
         //TODO: sauces will have their own separate method
         //TODO: DO movement of the pieces

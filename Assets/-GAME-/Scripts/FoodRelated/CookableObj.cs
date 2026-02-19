@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace _GAME_.Scripts.FoodRelated
 {
-    public abstract class CookableObj : Food
+    public class CookableObj : MonoBehaviour
     {
         private enum FoodState
         {
@@ -19,14 +19,12 @@ namespace _GAME_.Scripts.FoodRelated
         [SerializeField] private FoodState currentFoodState;
         [SerializeField] private List<Material> foodStateMaterials;
         private Coroutine _currentCoroutine;
+        private Food _food;
+        
 
-        public override void Interact()
+        private void Awake()
         {
-        }
-
-        protected override void Awake()
-        {
-            base.Awake();
+            _food = GetComponent<Food>();
             UpdateFoodState(FoodState.Raw);
         }
 
@@ -39,17 +37,19 @@ namespace _GAME_.Scripts.FoodRelated
             currentFoodState = state;
             if (currentFoodState == FoodState.Raw)
             {
-                objectInteractMessage = nameof(FoodState.Raw)+gameObject.name;
-                
+                _food.IsCooked = false;
+                _food.objectInteractMessage = nameof(FoodState.Raw)+gameObject.name;
             }
             if (currentFoodState == FoodState.Cooked)
             {
-                objectInteractMessage = nameof(FoodState.Cooked)+gameObject.name;
+                _food.objectInteractMessage = nameof(FoodState.Cooked)+gameObject.name;
+                _food.IsCooked = true;
             }
 
             if (currentFoodState == FoodState.Burned)
             {
-                objectInteractMessage = nameof(FoodState.Burned)+gameObject.name;
+                _food.objectInteractMessage = nameof(FoodState.Burned)+gameObject.name;
+                _food.IsCooked = false;
             }
             myRenderer.material = foodStateMaterials[(int)state];
         }
@@ -65,6 +65,7 @@ namespace _GAME_.Scripts.FoodRelated
 
             while (currentFoodState == FoodState.Cooked)
             {
+                
                 yield return new WaitForSeconds(burnTime); 
                 if (currentFoodState == FoodState.Cooked) UpdateFoodState(FoodState.Burned);
             }

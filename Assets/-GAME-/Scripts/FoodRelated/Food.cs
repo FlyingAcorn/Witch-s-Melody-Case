@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace _GAME_.Scripts.FoodRelated
@@ -13,7 +14,11 @@ namespace _GAME_.Scripts.FoodRelated
             Ketchup,
             Mustard
         }
-        [SerializeField] public FoodList foodType; 
+        [SerializeField] public FoodList foodType;
+        [NonSerialized] public bool IsCooked;
+        
+
+        
         //TODO: can be cooked can be fried like booleans to check
         
     }

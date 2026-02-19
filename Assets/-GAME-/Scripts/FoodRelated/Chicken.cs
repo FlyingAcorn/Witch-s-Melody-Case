@@ -1,17 +1,17 @@
-using _GAME_.Scripts.FoodRelated;
-using UnityEngine;
-
-public class Chicken : CookableObj
+namespace _GAME_.Scripts.FoodRelated
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public class Chicken : Food
     {
+        // Start is called once before the first execution of Update after the MonoBehaviour is created
+        void Start()
+        {
         
-    }
+        }
 
-    // Update is called once per frame
-    void Update()
-    {
+        // Update is called once per frame
+        void Update()
+        {
         
+        }
     }
 }
