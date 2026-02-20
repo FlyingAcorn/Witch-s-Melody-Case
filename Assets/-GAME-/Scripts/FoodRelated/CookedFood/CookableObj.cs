@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using _GAME_.Scripts.FoodRelated.MachineScripts;
 using UnityEngine;
 
 namespace _GAME_.Scripts.FoodRelated.CookedFood
@@ -32,19 +33,19 @@ namespace _GAME_.Scripts.FoodRelated.CookedFood
             currentFoodState = state;
             if (currentFoodState == FoodState.Raw)
             {
-                _food.IsCooked = false;
+                _food.PrepDone = false;
                 _food.objectInteractMessage = nameof(FoodState.Raw)+gameObject.name;
             }
             if (currentFoodState == FoodState.Cooked)
             {
                 _food.objectInteractMessage = nameof(FoodState.Cooked)+gameObject.name;
-                _food.IsCooked = true;
+                _food.PrepDone = true;
             }
 
             if (currentFoodState == FoodState.Burned)
             {
                 _food.objectInteractMessage = nameof(FoodState.Burned)+gameObject.name;
-                _food.IsCooked = false;
+                _food.PrepDone = false;
             }
             myRenderer.material = foodStateMaterials[(int)state];
         }

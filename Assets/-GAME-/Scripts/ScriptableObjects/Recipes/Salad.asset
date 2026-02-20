@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Salad
   m_EditorClassIdentifier: Assembly-CSharp::_GAME_.Scripts.ScriptableObjects.Recipes.RecipeScriptableObject
   recipeObject: 1
-  mainIngredients: 02000000030000000500000004000000
-  fillings: 02000000030000000500000004000000
+  hasNoRecipe: 0
+  mainIngredients: 03000000040000000500000006000000
+  fillings: 03000000040000000500000006000000
   sauces: 

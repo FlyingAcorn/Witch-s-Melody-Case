@@ -17,7 +17,7 @@ namespace _GAME_.Scripts.FoodRelated
         {
             if (obj.TryGetComponent(out Recipe food) && !food.MyObject.IsPickedUp)
             {
-                food.OnHolder = true;
+                food.MyObject.OnAHolder = true;
                 food.MyObject.RigidBody.isKinematic = true;
                 MoveToPos(food);
             }
@@ -27,7 +27,7 @@ namespace _GAME_.Scripts.FoodRelated
         {
             if (obj.TryGetComponent(out Recipe food) && food.MyObject.IsPickedUp)
             {
-                food.OnHolder = false;
+                food.MyObject.OnAHolder = false;
             }
         }
     }

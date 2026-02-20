@@ -7,6 +7,7 @@ namespace _GAME_.Scripts.FoodRelated
     {
         public enum FoodList
         {
+            Cookie,
             Chicken,
             Beef,
             Lettuce,
@@ -18,6 +19,7 @@ namespace _GAME_.Scripts.FoodRelated
             
         }
         public FoodList foodType;
-        [NonSerialized] public bool IsCooked;
+        [NonSerialized] public bool PrepDone;
+        
     }
 }

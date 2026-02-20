@@ -14,7 +14,7 @@ namespace _GAME_.Scripts.Player
         [SerializeField] private float interactionRange = 5f;
         [SerializeField] private float throwForce = 500f;
         [SerializeField] private Transform objHoldPos;
-        private Interactable _currentTargetedInteractable;
+        [SerializeField] private Interactable _currentTargetedInteractable;
         private Interactable _pickedInteractable;
         [SerializeField] private InputActionAsset myInputActionAsset;
         private InputAction _pickupAction;
@@ -92,7 +92,7 @@ namespace _GAME_.Scripts.Player
         private void UpdateCurrentInteractable()
         {
             var ray = playerCamera.ViewportPointToRay(new Vector2(0.5f, 0.5f));
-            Physics.Raycast(ray, out var hit, interactionRange, objectLayer);
+            Physics.Raycast(ray, out var hit, interactionRange, objectLayer, QueryTriggerInteraction.Ignore);
             _currentTargetedInteractable = hit.collider?.GetComponent<Interactable>();
         }
         

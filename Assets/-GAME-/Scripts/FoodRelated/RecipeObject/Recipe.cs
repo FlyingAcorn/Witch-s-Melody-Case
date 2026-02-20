@@ -18,7 +18,6 @@ namespace _GAME_.Scripts.FoodRelated.RecipeObject
         [SerializeField] private List<Food.FoodList> allowedFillings;
         [SerializeField] private List<Food.FoodList> allowedSauces; // sauces will cast a ray to check
         private bool _mainIngredientSelected;
-        [NonSerialized] public bool OnHolder;
         public List<Food.FoodList> foodsInside;
         
          private void Awake()
@@ -28,13 +27,31 @@ namespace _GAME_.Scripts.FoodRelated.RecipeObject
 
          private void OnTriggerStay(Collider other)
         {
-            if (!OnHolder) return;
+            if (!MyObject.OnAHolder) return;
             if (other.TryGetComponent(out Food food) && CheckFood(food) && !food.IsPickedUp)
             {
                 if (allowedMainIngredients.Contains(food.foodType)) _mainIngredientSelected  = true;
                 foodsInside.Add(food.foodType);
                 MoveFood(food);
             }
+        }
+        private bool CheckFood(Food food)
+        {
+            if (food.TryGetComponent(out CookableObj _) && !food.PrepDone)  return false;
+            if (foodsInside.Contains(food.foodType)) return false;
+            if (allowedMainIngredients.Contains(food.foodType) && !_mainIngredientSelected)
+            {
+                return true;
+            }
+            if (allowedFillings.Contains(food.foodType))
+            {
+                return true;
+            }
+            if (allowedSauces.Contains(food.foodType))
+            {
+                return true;
+            }
+            return false;
         }
 
         private void MoveFood(Food food)
@@ -51,14 +68,7 @@ namespace _GAME_.Scripts.FoodRelated.RecipeObject
             });
         }
 
-        private bool CheckFood(Food food)
-        {
-            if (foodsInside.Contains(food.foodType)) return false;
-            if (!allowedMainIngredients.Contains(food.foodType) && !allowedFillings.Contains(food.foodType)) return false;
-            if (allowedMainIngredients.Contains(food.foodType) && _mainIngredientSelected) return false;
-            if (food.TryGetComponent(out CookableObj _) && !food.IsCooked)  return false;
-                return true;
-        }
+       
         //TODO: sauces will have their own separate method
     }
 }

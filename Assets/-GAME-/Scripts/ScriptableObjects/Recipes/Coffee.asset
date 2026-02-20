@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a230988d7df3d0f43986a63ba4a1ac03, type: 3}
-  m_Name: Sandwich
+  m_Name: Coffee
   m_EditorClassIdentifier: Assembly-CSharp::_GAME_.Scripts.ScriptableObjects.Recipes.RecipeScriptableObject
-  recipeObject: 0
-  hasNoRecipe: 0
-  mainIngredients: 0100000002000000
-  fillings: 03000000040000000500000006000000
+  recipeObject: 5
+  hasNoRecipe: 1
+  mainIngredients: 
+  fillings: 
   sauces: 
