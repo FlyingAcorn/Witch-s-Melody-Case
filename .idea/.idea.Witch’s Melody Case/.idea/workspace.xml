@@ -14,6 +14,8 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/Assets/-GAME-/Scripts/Customer/Customer.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/-GAME-/Scripts/Customer/CustomerTypeInfo.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/-GAME-/Scripts/FoodRelated/Food.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/-GAME-/Scripts/FoodRelated/RecipeHolder.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.render-pipelines.universal@a6e30d1f59f5/Runtime/UniversalAdditionalCameraData.cs" root0="SKIP_HIGHLIGHTING" />
@@ -117,7 +119,8 @@
       <workItem from="1771434487027" duration="13612000" />
       <workItem from="1771505941802" duration="4325000" />
       <workItem from="1771517768930" duration="1497000" />
-      <workItem from="1771538576615" duration="6105000" />
+      <workItem from="1771538576615" duration="6291000" />
+      <workItem from="1771546497262" duration="12126000" />
     </task>
     <servers />
   </component>

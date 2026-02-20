@@ -19,7 +19,7 @@ namespace _GAME_.Scripts.FoodRelated.HolderIngredient
         [SerializeField] private List<Food.FoodList> allowedSauces; // sauces will cast a ray to check
         private bool _mainIngredientSelected;
         [NonSerialized] public bool OnCuttingBoard;
-        [SerializeField] private List<Food.FoodList> foodsInside;
+        public List<Food.FoodList> foodsInside;
         
          private void Awake()
          {
