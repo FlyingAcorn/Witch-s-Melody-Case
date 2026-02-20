@@ -18,6 +18,9 @@
     <setting file="file://$PROJECT_DIR$/Assets/-GAME-/Scripts/Customer/CustomerTypeInfo.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/-GAME-/Scripts/FoodRelated/Food.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/-GAME-/Scripts/FoodRelated/RecipeHolder.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/-GAME-/Scripts/FoodRelated/RecipeObject/Bowl.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/-GAME-/Scripts/FoodRelated/RecipeObject/Bread.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/-GAME-/Scripts/FoodRelated/RecipeObject/Recipe.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.render-pipelines.universal@a6e30d1f59f5/Runtime/UniversalAdditionalCameraData.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
@@ -121,6 +124,7 @@
       <workItem from="1771517768930" duration="1497000" />
       <workItem from="1771538576615" duration="6291000" />
       <workItem from="1771546497262" duration="12126000" />
+      <workItem from="1771590302697" duration="4232000" />
     </task>
     <servers />
   </component>

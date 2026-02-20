@@ -949,7 +949,7 @@ MonoBehaviour:
   isInteractable: 0
   canBePickedUp: 1
   isSharp: 0
-  foodType: 0
+  recipeObjectsType: 0
 --- !u!114 &5633131580913400807
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -972,8 +972,8 @@ MonoBehaviour:
   - {fileID: 2940813260625308716}
   - {fileID: 1611868168483715226}
   - {fileID: 8165726614338030109}
-  allowedMainIngredients: 
-  allowedFillings: 
+  allowedMainIngredients: 0100000000000000
+  allowedFillings: 03000000040000000500000002000000
   allowedSauces: 
   foodsInside: 
 --- !u!1 &9043313551036255960

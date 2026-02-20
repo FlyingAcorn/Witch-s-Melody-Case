@@ -500,8 +500,9 @@ MonoBehaviour:
   - {fileID: 7992652239311974527}
   knownRecipes:
   - {fileID: 11400000, guid: c23c84e85cb39324eb14e6283ee10202, type: 2}
+  - {fileID: 11400000, guid: b26f397768ca58b48b84bb47dd70d1d2, type: 2}
   moveTime: 2
-  selectedCoreFood: 2
+  selectedRecipeObject: 0
   selectedIngredients: 
 --- !u!65 &7979507794081492434
 BoxCollider:

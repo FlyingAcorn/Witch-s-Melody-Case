@@ -7,7 +7,6 @@ namespace _GAME_.Scripts.FoodRelated
     {
         public enum FoodList
         {
-            Bread,
             Chicken,
             Beef,
             Lettuce,

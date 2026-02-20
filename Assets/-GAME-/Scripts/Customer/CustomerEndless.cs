@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using _GAME_.Scripts.FoodRelated;
-using _GAME_.Scripts.FoodRelated.HolderIngredient;
+using _GAME_.Scripts.FoodRelated.RecipeObject;
 using _GAME_.Scripts.ScriptableObjects.Recipes;
 using DG.Tweening;
 using UnityEngine;
@@ -20,7 +20,7 @@ namespace _GAME_.Scripts.Customer
         [SerializeField] private List<RecipeScriptableObject> knownRecipes;
         [SerializeField] private int moveTime;
         private CustomerTypeInfo _currentCustomerType;
-        [SerializeField] private Food.FoodList selectedCoreFood;
+        [SerializeField] private RecipeObject.RecipeObjects selectedRecipeObject;
         [SerializeField] private List<Food.FoodList> selectedIngredients;
 
 
@@ -82,15 +82,16 @@ namespace _GAME_.Scripts.Customer
         private void SelectRecipe()
         {
             var selectedRecipe = knownRecipes[Random.Range(0, knownRecipes.Count)];
-            selectedCoreFood = selectedRecipe.coreFood;
-            selectedIngredients.AddRange(RandomSelection(selectedRecipe.mainIngredients,1));
-            selectedIngredients.AddRange(RandomSelection(selectedRecipe.fillings));
-            //selectedIngredients.AddRange(RandomSelection(selectedRecipe.sauces)); // later
+            selectedRecipeObject = selectedRecipe.recipeObject;
+            var ingredients = new List<Food.FoodList>();
+            ingredients.AddRange(RandomSelection(selectedRecipe.mainIngredients,1));
+            ingredients.AddRange(RandomSelection(selectedRecipe.fillings));
+            selectedIngredients = ingredients.Where(i => ingredients.Count(j => i == j) == 1).ToList();;
         }
 
-        private bool CompareRecipes(RecipeFood food)
+        private bool CompareRecipes(Recipe food)
         {
-            if (selectedCoreFood != food.MyFood.foodType) return false;
+            if (selectedRecipeObject != food.MyObject.recipeObjectsType) return false;
             if (!selectedIngredients.All(food.foodsInside.Contains)
                 || selectedIngredients.Count != food.foodsInside.Count) return false;
             return true;
@@ -112,7 +113,7 @@ namespace _GAME_.Scripts.Customer
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.gameObject.TryGetComponent(out RecipeFood recipeFood) && CompareRecipes(recipeFood))
+            if (other.gameObject.TryGetComponent(out Recipe recipeFood) && CompareRecipes(recipeFood))
             {
                 other.gameObject.SetActive(false);
                 UpdateCustomerState(CustomerState.Buying);

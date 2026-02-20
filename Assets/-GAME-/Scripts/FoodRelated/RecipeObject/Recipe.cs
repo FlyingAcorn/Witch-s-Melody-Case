@@ -5,30 +5,30 @@ using _GAME_.Scripts.FoodRelated.CookedFood;
 using DG.Tweening;
 using UnityEngine;
 
-namespace _GAME_.Scripts.FoodRelated.HolderIngredient
+namespace _GAME_.Scripts.FoodRelated.RecipeObject
 {
-    public class RecipeFood : MonoBehaviour
+    public class Recipe : MonoBehaviour
     {
         [Header("References")] 
         [SerializeField] private Transform centerPos;
-        [NonSerialized] public Food MyFood;
+        [NonSerialized] public RecipeObject MyObject;
         [SerializeField] private List<FoodMeshInfo> meshReferences;
         [Header("RecipeConfigurations")] 
         [SerializeField] private List<Food.FoodList> allowedMainIngredients;
         [SerializeField] private List<Food.FoodList> allowedFillings;
         [SerializeField] private List<Food.FoodList> allowedSauces; // sauces will cast a ray to check
         private bool _mainIngredientSelected;
-        [NonSerialized] public bool OnCuttingBoard;
+        [NonSerialized] public bool OnHolder;
         public List<Food.FoodList> foodsInside;
         
          private void Awake()
          {
-             MyFood  = GetComponent<Food>();
+             MyObject  = GetComponent<RecipeObject>();
          }
 
          private void OnTriggerStay(Collider other)
         {
-            if (!OnCuttingBoard) return;
+            if (!OnHolder) return;
             if (other.TryGetComponent(out Food food) && CheckFood(food) && !food.IsPickedUp)
             {
                 if (allowedMainIngredients.Contains(food.foodType)) _mainIngredientSelected  = true;
