@@ -11,7 +11,6 @@ namespace _GAME_.Scripts.FoodRelated.MachineScripts
         [Header("References")]
         [SerializeField] private Transform cupHoldPos;
         [SerializeField] private Transform lidHoldPos;
-        [SerializeField] private CoffeMakerPodArea coffeePod;
         [Header("MachineSettings")]
         [SerializeField] private int fillTimer;
         [SerializeField] private Recipe finishedProduct;
@@ -46,8 +45,6 @@ namespace _GAME_.Scripts.FoodRelated.MachineScripts
 
             if (state == CoffeeMakerStates.Waiting)
             {
-                coffeePod.PodInserted.gameObject.SetActive(false);
-                coffeePod.PodInserted = null;
             }
             if (state == CoffeeMakerStates.Finished)
             {
@@ -68,7 +65,7 @@ namespace _GAME_.Scripts.FoodRelated.MachineScripts
 
         public override void Interact()
         {
-            if (currentState == CoffeeMakerStates.Idle && _cupInserted && coffeePod.PodInserted)
+            if (currentState == CoffeeMakerStates.Idle && _cupInserted)
             {
                 UpdateCoffeeMakerState(CoffeeMakerStates.Working);
             }
