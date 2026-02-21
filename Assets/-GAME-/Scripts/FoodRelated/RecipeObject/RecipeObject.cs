@@ -11,7 +11,7 @@ namespace _GAME_.Scripts.FoodRelated.RecipeObject
             Cup,
             Plate,
             Coffee,
-            CookieRecipeFood,
+            CookiePaper
         }
         public RecipeObjects recipeObjectsType;
     }

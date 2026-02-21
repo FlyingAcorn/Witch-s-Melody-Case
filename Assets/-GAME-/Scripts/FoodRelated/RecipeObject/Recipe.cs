@@ -60,11 +60,16 @@ namespace _GAME_.Scripts.FoodRelated.RecipeObject
             food.transform.DOMove(centerPos.position, 0.1f).OnComplete(() =>
             {
                 food.gameObject.SetActive(false);
-                foreach (var meshInfo in meshReferences.Where(meshInfo => meshInfo.myType == food.foodType))
-                {
-                    meshInfo.gameObject.SetActive(true);
-                }
+                ChangeMesh(food);
             });
+        }
+
+        public void ChangeMesh(Food food)
+        {
+            foreach (var meshInfo in meshReferences.Where(meshInfo => meshInfo.myType == food.foodType))
+            {
+                meshInfo.gameObject.SetActive(true);
+            }
         }
 
        

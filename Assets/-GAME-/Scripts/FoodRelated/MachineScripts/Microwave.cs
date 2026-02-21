@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using _GAME_.Scripts.FoodRelated.RecipeObject;
 using DG.Tweening;
@@ -9,11 +10,11 @@ namespace _GAME_.Scripts.FoodRelated.MachineScripts
     {
         [Header("References")] 
         [SerializeField] private Transform microwaveTransform;
+        [SerializeField] private Transform microwaveHandle;
         [Header("MachineSettings")] 
         [SerializeField] private int prepTime;
-        [SerializeField] private Recipe product;
 
-        private MicrowaveableFood _currentMicrowaveFood; //Microwaved food
+        [NonSerialized] public MicrowaveableFood CurrentMicrowaveFood; //Microwaved food
         private Coroutine _currentCoroutine;
         
         public enum MicrowaveState
@@ -31,8 +32,7 @@ namespace _GAME_.Scripts.FoodRelated.MachineScripts
             currentState = state;
             if (state == MicrowaveState.Idle)
             {
-                _currentMicrowaveFood = null;
-                
+               
             }
             if (state == MicrowaveState.Working)
             {
@@ -40,27 +40,35 @@ namespace _GAME_.Scripts.FoodRelated.MachineScripts
             }
             if (state == MicrowaveState.Waiting)
             {
-                
+                //Play sound
             }
             if (state == MicrowaveState.Finished)
             {
                 StopCoroutine(_currentCoroutine);
                 _currentCoroutine = null;
-                _currentMicrowaveFood!.gameObject.SetActive(false);
-                Instantiate(product, microwaveTransform.position, Quaternion.identity);
             }
         }
 
         public override void Interact()
         {
-            if (currentState == MicrowaveState.Idle && _currentMicrowaveFood )
+            if (currentState == MicrowaveState.Idle && CurrentMicrowaveFood )
             {
-                UpdateMicrowaveState(MicrowaveState.Working);
+                microwaveHandle.transform.DORotate(new Vector3(0, 0, 0), 0.5f)
+                    .OnComplete((() => {UpdateMicrowaveState(MicrowaveState.Working);}));
+                
             }
             if (currentState == MicrowaveState.Waiting)
             {
-                UpdateMicrowaveState(MicrowaveState.Finished);
+                microwaveHandle.transform.DORotate(new Vector3(0, 120, 0), 0.5f)
+                    .OnComplete((() => {UpdateMicrowaveState(MicrowaveState.Finished);}));
             }
+        }
+
+        public void ResetState()
+        {
+            CurrentMicrowaveFood!.gameObject.SetActive(false);
+            CurrentMicrowaveFood = null;
+            currentState = MicrowaveState.Idle;
         }
         
         private void MoveToPos(MicrowaveableFood obj, Transform targetPos)
@@ -80,11 +88,11 @@ namespace _GAME_.Scripts.FoodRelated.MachineScripts
         
         private void OnTriggerEnter(Collider other)
         {
-            if (other.TryGetComponent(out MicrowaveableFood food) && !_currentMicrowaveFood && !food.Food.IsPickedUp)
+            if (other.TryGetComponent(out MicrowaveableFood food) && !CurrentMicrowaveFood && !food.Food.IsPickedUp)
             {
                 food.GetComponent<Collider>().gameObject.layer = 0;
                 MoveToPos(food,microwaveTransform);
-                _currentMicrowaveFood = food;
+                CurrentMicrowaveFood = food;
                 food.Food.RigidBody.isKinematic = true;
             }
         }
