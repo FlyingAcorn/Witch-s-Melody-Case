@@ -10,7 +10,8 @@ namespace _GAME_.Scripts.FoodRelated.RecipeObject
             FryingBag,
             Cup,
             Plate,
-            Coffee
+            Coffee,
+            CookieRecipeFood,
         }
         public RecipeObjects recipeObjectsType;
     }

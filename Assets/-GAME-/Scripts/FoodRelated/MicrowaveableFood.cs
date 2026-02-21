@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace _GAME_.Scripts.FoodRelated
 {
-    public class FryableFood : MonoBehaviour
+    public class MicrowaveableFood : MonoBehaviour
     {
         [NonSerialized] public Food Food;
         [SerializeField] private Renderer myRenderer;
@@ -19,8 +19,5 @@ namespace _GAME_.Scripts.FoodRelated
         {
             myRenderer.material = foodStateMaterials[index];
         }
-        
-        
-        
     }
 }

@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using _GAME_.Scripts.FoodRelated.FriedFood;
 using DG.Tweening;
 using UnityEngine;
 
@@ -9,8 +8,8 @@ namespace _GAME_.Scripts.FoodRelated.MachineScripts
 {
     public class Fryer : Interactable
     {
-        [Header("References")] [SerializeField]
-        private Transform fryerTransform;
+        [Header("References")] 
+        [SerializeField] private Transform fryerTransform;
         [Header("MachineSettings")] 
         [SerializeField] private int fryTimer;
         [SerializeField] private int burnTimer;

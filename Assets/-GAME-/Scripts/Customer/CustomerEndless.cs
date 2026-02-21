@@ -84,10 +84,12 @@ namespace _GAME_.Scripts.Customer
             var selectedRecipe = knownRecipes[Random.Range(0, knownRecipes.Count)];
             selectedRecipeObject = selectedRecipe.recipeObject;
             var ingredients = new List<Food.FoodList>();
-            ingredients.AddRange(RandomSelection(selectedRecipe?.mainIngredients,1));
+            ingredients.AddRange(RandomSelection(selectedRecipe.mainIngredients,1));
             ingredients.AddRange(RandomSelection(selectedRecipe.fillings));
             ingredients.AddRange(RandomSelection(selectedRecipe.sauces));
-            selectedIngredients = ingredients.Where(i => ingredients.Count(j => i == j) == 1).ToList();
+            var foodLists = ingredients.Where(i => ingredients.Count(j => i == j) == 1).ToList();
+            foodLists.TrimExcess();
+            selectedIngredients = foodLists;
         }
 
         private bool CompareRecipes(Recipe food)

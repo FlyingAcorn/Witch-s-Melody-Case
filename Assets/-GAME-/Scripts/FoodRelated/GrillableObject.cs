@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using _GAME_.Scripts.FoodRelated.MachineScripts;
 using UnityEngine;
 
-namespace _GAME_.Scripts.FoodRelated.GrilledFood
+namespace _GAME_.Scripts.FoodRelated
 {
     public class GrillableObject : MonoBehaviour
     {
