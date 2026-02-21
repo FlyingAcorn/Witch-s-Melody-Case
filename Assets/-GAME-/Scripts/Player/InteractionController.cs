@@ -57,7 +57,7 @@ namespace _GAME_.Scripts.Player
                     PickUpObject(_pickedInteractable.gameObject);
                     
                 }
-                else if (_currentTargetedInteractable.isInteractable)
+                else if (_currentTargetedInteractable.isInteractable) 
                 {
                     _currentTargetedInteractable.Interact();
                 }
@@ -100,6 +100,7 @@ namespace _GAME_.Scripts.Player
         {
             if (pickUpObj.TryGetComponent(out Rigidbody rb)) 
             {
+                pickUpObj.layer = LayerMask.NameToLayer("HeldObject");
                 rb.isKinematic = false;
                 _pickedInteractable.IsPickedUp = true;
                 rb.useGravity =false;
@@ -110,6 +111,7 @@ namespace _GAME_.Scripts.Player
         }
         void DropObject()
         {
+            _pickedInteractable.gameObject.layer = LayerMask.NameToLayer("Object");
             _pickedInteractable.RigidBody.useGravity = true;
             _pickedInteractable.RigidBody.linearVelocity = Vector3.zero;
             _pickedInteractable.IsPickedUp = false;
@@ -125,6 +127,7 @@ namespace _GAME_.Scripts.Player
         }
         void ThrowObject()
         {
+            _pickedInteractable.gameObject.layer = LayerMask.NameToLayer("Object");
             _pickedInteractable.RigidBody.linearVelocity = Vector3.zero;
             _pickedInteractable.IsPickedUp = false;
             _pickedInteractable.RigidBody.useGravity = true;

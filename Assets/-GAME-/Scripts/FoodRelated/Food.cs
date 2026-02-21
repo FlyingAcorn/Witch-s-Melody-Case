@@ -1,9 +1,7 @@
 using System;
-using UnityEngine;
-
 namespace _GAME_.Scripts.FoodRelated
 {
-    public abstract class Food : Interactable
+    public class Food : Interactable
     {
         public enum FoodList
         {
@@ -15,11 +13,12 @@ namespace _GAME_.Scripts.FoodRelated
             Onion,
             Tomato,
             Ketchup,
-            Mustard
-            
+            Mustard,
+            Fries,
+            OnionRings,
+            Nuggets
         }
         public FoodList foodType;
         [NonSerialized] public bool PrepDone;
-        
     }
 }

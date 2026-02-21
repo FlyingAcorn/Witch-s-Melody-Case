@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using _GAME_.Scripts.FoodRelated.CookedFood;
+using _GAME_.Scripts.FoodRelated.GrilledFood;
 using DG.Tweening;
 using UnityEngine;
 
@@ -14,10 +14,10 @@ namespace _GAME_.Scripts.FoodRelated.RecipeObject
         [NonSerialized] public RecipeObject MyObject;
         [SerializeField] private List<FoodMeshInfo> meshReferences;
         [Header("RecipeConfigurations")] 
-        [SerializeField] private List<Food.FoodList> allowedMainIngredients;
+         public List<Food.FoodList> allowedMainIngredients;
         [SerializeField] private List<Food.FoodList> allowedFillings;
         [SerializeField] private List<Food.FoodList> allowedSauces; // sauces will cast a ray to check
-        private bool _mainIngredientSelected;
+        [NonSerialized] public bool MainIngredientSelected;
         public List<Food.FoodList> foodsInside;
         
          private void Awake()
@@ -30,16 +30,16 @@ namespace _GAME_.Scripts.FoodRelated.RecipeObject
             if (!MyObject.OnAHolder) return;
             if (other.TryGetComponent(out Food food) && CheckFood(food) && !food.IsPickedUp)
             {
-                if (allowedMainIngredients.Contains(food.foodType)) _mainIngredientSelected  = true;
+                if (allowedMainIngredients.Contains(food.foodType)) MainIngredientSelected  = true;
                 foodsInside.Add(food.foodType);
                 MoveFood(food);
             }
         }
-        private bool CheckFood(Food food)
+        public bool CheckFood(Food food)
         {
-            if (food.TryGetComponent(out CookableObj _) && !food.PrepDone)  return false;
+            if (food.TryGetComponent(out GrillableObject _) && !food.PrepDone)  return false;
             if (foodsInside.Contains(food.foodType)) return false;
-            if (allowedMainIngredients.Contains(food.foodType) && !_mainIngredientSelected)
+            if (allowedMainIngredients.Contains(food.foodType) && !MainIngredientSelected)
             {
                 return true;
             }

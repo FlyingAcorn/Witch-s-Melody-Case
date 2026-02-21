@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 601744532772929272}
   - component: {fileID: 2800942789795156342}
   - component: {fileID: 6046683786698020645}
-  - component: {fileID: 6207489229235232771}
   - component: {fileID: 3845820074390747018}
+  - component: {fileID: 7915001424476227583}
   m_Layer: 6
   m_Name: Beef
   m_TagString: Untagged
@@ -143,23 +143,6 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -8992237102958600999, guid: d4cda19885486764bb85a5b221e3cb9b, type: 3}
---- !u!114 &6207489229235232771
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8983668309763433895}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b3d6adfbe6c523f448673eed6af7dad0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Beef
-  objectInteractMessage: Beef
-  isInteractable: 0
-  canBePickedUp: 1
-  isSharp: 0
-  foodType: 2
 --- !u!114 &3845820074390747018
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -180,3 +163,20 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 3dcd4c2c1d942964e8134653ef1e5bf2, type: 2}
   - {fileID: 2100000, guid: 8a8b8c4795faa2044aa82f8f8968ffb4, type: 2}
   - {fileID: 2100000, guid: 09fb36dca98637349b8b8b1bf24e3bfa, type: 2}
+--- !u!114 &7915001424476227583
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8983668309763433895}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e7ce7f05acaf0a4a8223b39db555eea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::_GAME_.Scripts.FoodRelated.Food
+  objectInteractMessage: Beef
+  isInteractable: 0
+  canBePickedUp: 1
+  isSharp: 0
+  foodType: 2

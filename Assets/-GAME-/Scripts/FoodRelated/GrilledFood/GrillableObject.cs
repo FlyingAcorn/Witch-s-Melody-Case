@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using _GAME_.Scripts.FoodRelated.MachineScripts;
 using UnityEngine;
 
-namespace _GAME_.Scripts.FoodRelated.CookedFood
+namespace _GAME_.Scripts.FoodRelated.GrilledFood
 {
-    public class CookableObj : MonoBehaviour
+    public class GrillableObject : MonoBehaviour
     {
         private enum FoodState
         {
@@ -55,7 +55,7 @@ namespace _GAME_.Scripts.FoodRelated.CookedFood
             while (currentFoodState == FoodState.Raw)
             {
                 yield return new WaitForSeconds(cookTime);
-                if (currentFoodState == FoodState.Raw) UpdateFoodState(FoodState.Cooked);
+                UpdateFoodState(FoodState.Cooked);
                 
             }
 
@@ -63,13 +63,13 @@ namespace _GAME_.Scripts.FoodRelated.CookedFood
             {
                 
                 yield return new WaitForSeconds(burnTime); 
-                if (currentFoodState == FoodState.Cooked) UpdateFoodState(FoodState.Burned);
+                UpdateFoodState(FoodState.Burned);
             }
         }
         
         private void OnTriggerEnter(Collider other)
         {
-            if (other.TryGetComponent(out Cooker _))
+            if (other.TryGetComponent(out Grill _))
             {
                 _currentCoroutine = StartCoroutine(Cooking());
             }
@@ -77,7 +77,7 @@ namespace _GAME_.Scripts.FoodRelated.CookedFood
 
         private void OnTriggerExit(Collider other)
         {
-            if (!other.TryGetComponent(out Cooker _)) return;
+            if (!other.TryGetComponent(out Grill _)) return;
             if (_currentCoroutine == null) return;
             StopCoroutine(_currentCoroutine);
             _currentCoroutine = null;

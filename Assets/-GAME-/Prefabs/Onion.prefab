@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5830190042488088187}
   - component: {fileID: 3900419641417184380}
   - component: {fileID: 3902617438642253602}
-  - component: {fileID: 1336573649962611678}
+  - component: {fileID: 7257324139178843637}
   m_Layer: 6
   m_Name: Onion
   m_TagString: Untagged
@@ -141,7 +141,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.13124701, y: 0.008491576, z: 0.13800126}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1336573649962611678
+--- !u!114 &7257324139178843637
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -150,9 +150,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 4411833506946010966}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7b3f3ff168d81ad43bf993c5c35a0f81, type: 3}
+  m_Script: {fileID: 11500000, guid: 0e7ce7f05acaf0a4a8223b39db555eea, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::_GAME_.Scripts.FoodRelated.Fillings.Onion
+  m_EditorClassIdentifier: Assembly-CSharp::_GAME_.Scripts.FoodRelated.Food
   objectInteractMessage: Onion
   isInteractable: 0
   canBePickedUp: 1

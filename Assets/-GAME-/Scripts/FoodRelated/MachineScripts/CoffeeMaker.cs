@@ -8,10 +8,12 @@ namespace _GAME_.Scripts.FoodRelated.MachineScripts
 {
     public class CoffeeMaker : Interactable
     {
+        [Header("References")]
         [SerializeField] private Transform cupHoldPos;
         [SerializeField] private Transform lidHoldPos;
-        [SerializeField] private int fillTimer;
         [SerializeField] private CoffeMakerPodArea coffeePod;
+        [Header("MachineSettings")]
+        [SerializeField] private int fillTimer;
         [SerializeField] private Recipe finishedProduct;
         
         private CoffeeCup _cupInserted;
@@ -53,7 +55,6 @@ namespace _GAME_.Scripts.FoodRelated.MachineScripts
                 _cupInserted = null;
                 Instantiate(finishedProduct, cupHoldPos.position, Quaternion.identity);
             }
-            
         }
         
         private void MoveToPos(Interactable obj, Transform targetPos)
@@ -75,12 +76,11 @@ namespace _GAME_.Scripts.FoodRelated.MachineScripts
 
         private IEnumerator MakeCoffee()
         {
-           yield return new WaitForSeconds(fillTimer); // animation and whatnot will play
+           yield return new WaitForSeconds(fillTimer);
            UpdateCoffeeMakerState(CoffeeMakerStates.Waiting);
-           
         }
         
-        private void OnTriggerStay(Collider obj)  // cup ve lid alınamıyacak içeri koyuldugunda
+        private void OnTriggerStay(Collider obj)
         {
             if (obj.TryGetComponent(out CoffeeCup cup) && !_cupInserted && !cup.IsPickedUp)
             {

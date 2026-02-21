@@ -83,10 +83,10 @@ namespace _GAME_.Scripts.Customer
         {
             var selectedRecipe = knownRecipes[Random.Range(0, knownRecipes.Count)];
             selectedRecipeObject = selectedRecipe.recipeObject;
-            if(selectedRecipe.hasNoRecipe) return;
             var ingredients = new List<Food.FoodList>();
-            ingredients.AddRange(RandomSelection(selectedRecipe.mainIngredients,1));
+            ingredients.AddRange(RandomSelection(selectedRecipe?.mainIngredients,1));
             ingredients.AddRange(RandomSelection(selectedRecipe.fillings));
+            ingredients.AddRange(RandomSelection(selectedRecipe.sauces));
             selectedIngredients = ingredients.Where(i => ingredients.Count(j => i == j) == 1).ToList();
         }
 
@@ -102,6 +102,7 @@ namespace _GAME_.Scripts.Customer
         {
             var timesOfRepeat = repeat == 0 ? Random.Range(0, list.Count)+1 : repeat;
             var copyList = new List<Food.FoodList>(list);
+            if (copyList.Count == 0) return copyList;
             var resultList = new List<Food.FoodList>();
             for (var i = 0; i < timesOfRepeat; i++)
             {

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 592039671516754079}
   - component: {fileID: 7791959741651588582}
   - component: {fileID: 5407603716993359384}
-  - component: {fileID: 8462897002422821393}
+  - component: {fileID: 5058146266388949287}
   m_Layer: 6
   m_Name: Tomato
   m_TagString: Untagged
@@ -141,7 +141,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.13124701, y: 0.008491576, z: 0.13800126}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &8462897002422821393
+--- !u!114 &5058146266388949287
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -150,9 +150,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 4270915766177445431}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2e4acc7298056c64fbd56d79c8cbca27, type: 3}
+  m_Script: {fileID: 11500000, guid: 0e7ce7f05acaf0a4a8223b39db555eea, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::_GAME_.Scripts.FoodRelated.Fillings.Tomato
+  m_EditorClassIdentifier: Assembly-CSharp::_GAME_.Scripts.FoodRelated.Food
   objectInteractMessage: Tomato
   isInteractable: 0
   canBePickedUp: 1
